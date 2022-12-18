@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 18 dic. 2022, 15:44:36
+    Document   : register
+    Created on : 18 dic. 2022, 18:04:38
     Author     : franc
 --%>
 
@@ -36,8 +36,8 @@
     <link href="assets/css/theme.css" rel="stylesheet" />
 
   </head>
-
-
+   
+  
   <body>
 
     <!-- ===============================================-->
@@ -72,6 +72,34 @@
               <h1 class="display-3 text-1000 fw-normal">Let’s make a tour</h1>
               <h1 class="display-3 text-primary fw-bold">Discover the beauty</h1>
               <div class="pt-5">
+                <nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                      <form class="row g-4 mt-5">
+                        <div class="col-sm-6 col-md-6 col-xl-5">
+                          <div class="input-group-icon">
+                            <label class="form-label visually-hidden" for="inputEmail">Email</label>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Email" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-xl-5">
+                          <div class="input-group-icon">
+                            <label class="form-label visually-hidden" for="inputAddress2">Address 2</label>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="password" placeholder="Password" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
+                          <a href="vistaCliente.jsp" class="btn btn-secondary" type="submit">Sign as Client</a>
+                        </div>
+                        <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
+                          <button class="btn btn-secondary" type="submit">Sign as Host</button>
+                        </div>
+                      </form>
+                    </div>
+                   
+                  </div>
+                </nav>
               </div>
             </div>
           </div>
@@ -288,7 +316,8 @@
             </div>
           </div>
         </div>
-      </section> 
+      </section>
+      
       
       <!-- <section> begin ============================-->
       <section class="py-0 overflow-hidden">

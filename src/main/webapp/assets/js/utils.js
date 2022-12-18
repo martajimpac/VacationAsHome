@@ -18,7 +18,7 @@ const camelize = (str) => {
   const text = str.replace(/[-_\s.]+(.)?/g, (_, c) =>
     c ? c.toUpperCase() : ""
   );
-  return `${text.substr(0, 1).toLowerCase()}${text.substr(1)}`;
+  return ${text.substr(0, 1).toLowerCase()}${text.substr(1)};
 };
 
 const getData = (el, data) => {
