@@ -29,12 +29,11 @@
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
 
-
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="assets/css/theme.css" rel="stylesheet" />
-
+    <link href="assets/css/main.css" rel="stylesheet" />
   </head>
 
 
@@ -56,7 +55,7 @@
             </ul>
             <form>
               <a class="nav-item px-2"></a>
-              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Sign in</span></a>
+              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><img id="iconoRegister" src="./assets/img/icons/register.png" /><span class="text-primary"></span></a>
             </form>
           </div>
         </div>
@@ -77,14 +76,14 @@
                       <form class="row g-4 mt-5">
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress1">Address 1</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="From where" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress2">Address 2</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="To where" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
+                            <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
@@ -104,11 +103,12 @@
                               <option selected="selected">2 Adults</option>
                               <option>2 Adults 1 children</option>
                               <option>2 Adults 2 children</option>
+                              
                             </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
                           </div>
                         </div>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                          <button class="btn btn-secondary" type="submit">Search Packages</button>
+                            <button class="btn btn-secondary" type="submit" >Search Packages</button>
                         </div>
                       </form>
                     </div>
@@ -332,7 +332,6 @@
       </section>
       <!-- ============================================-->
       
-      
       <!-- <section> begin ============================-->
       <section class="py-0 overflow-hidden">
         <div class="container">
@@ -368,14 +367,10 @@
       <!-- <section> close ============================-->
       <!-- ============================================-->
 
-
     </main>
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-
-
-
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
@@ -386,6 +381,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="vendors/fontawesome/all.min.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
   </body>
