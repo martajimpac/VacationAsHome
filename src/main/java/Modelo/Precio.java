@@ -47,31 +47,31 @@ public class Precio {
     }
     
         public Moneda getPrecioNoche() {
-        return precioNoche;
+        return this.precioNoche;
     }
 
     public Moneda getPrecioFinDeSemana() {
-        return precioFinDeSemana;
+        return this.precioFinDeSemana;
     }
 
     public Moneda getPrecioMes() {
-        return precioMes;
+        return this.precioMes;
     }
 
     public Date getFechaIncio() {
-        return fechaIncio;
+        return this.fechaIncio;
     }
 
     public Date getFechaFin() {
-        return fechaFin;
+        return this.fechaFin;
     }
 
     public String getAlojamiento_ubicacion_precisa() {
-        return alojamiento_ubicacion_precisa;
+        return this.alojamiento_ubicacion_precisa;
     }
 
     public String getAlojamiento_anfitrion_email() {
-        return alojamiento_anfitrion_email;
+        return this.alojamiento_anfitrion_email;
     }
 }
 

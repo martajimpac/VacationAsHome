@@ -63,42 +63,42 @@ public class Reserva {
     }
 
     public int getID() {
-        return ID;
+        return this.ID;
     }
 
     public Date getFechaEntrada() {
-        return fechaEntrada;
+        return this.fechaEntrada;
     }
 
     public Date getFechaSalida() {
-        return fechaSalida;
+        return this.fechaSalida;
     }
 
     public int getNumHuespedes() {
-        return numHuespedes;
+        return this.numHuespedes;
     }
 
     public String getComentarios() {
-        return comentarios;
+        return this.comentarios;
     }
 
     public EstadoReserva getEstado() {
-        return estado;
+        return this.estado;
     }
 
     public boolean isDividePago() {
-        return dividePago;
+        return this.dividePago;
     }
 
     public String getUsuarioRegistrado_email() {
-        return usuarioRegistrado_email;
+        return this.usuarioRegistrado_email;
     }
 
     public String getAlojamiento_ubicacion_precisa() {
-        return alojamiento_ubicacion_precisa;
+        return this.alojamiento_ubicacion_precisa;
     }
 
     public String getAlojamiento_anfitrion_email() {
-        return alojamiento_anfitrion_email;
+        return this.alojamiento_anfitrion_email;
     }
 }

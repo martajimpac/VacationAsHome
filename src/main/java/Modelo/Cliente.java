@@ -27,14 +27,14 @@ public class Cliente {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public Date getFechaSubscripcion() {
-        return fechaSubscripcion;
+        return this.fechaSubscripcion;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 }

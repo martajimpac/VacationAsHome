@@ -12,7 +12,7 @@ import java.io.File;
  */
 public class Imagen {
    private String etiqueta = "";
-   private File imagen = new File("path");
+   private File imagen;
    private String alojamiento_ubicacionPrecisa = "";
    private String alojamiento_anfitrion_email = "";
 
@@ -33,18 +33,18 @@ public class Imagen {
     }
 
     public String getEtiqueta() {
-        return etiqueta;
+        return this.etiqueta;
     }
 
     public File getImagen() {
-        return imagen;
+        return this.imagen;
     }
 
     public String getAlojamiento_ubicacionPrecisa() {
-        return alojamiento_ubicacionPrecisa;
+        return this.alojamiento_ubicacionPrecisa;
     }
 
     public String getAlojamiento_anfitrion_email() {
-        return alojamiento_anfitrion_email;
+        return this.alojamiento_anfitrion_email;
     }
 }

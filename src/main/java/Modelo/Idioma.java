@@ -21,10 +21,10 @@ public class Idioma {
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public String getAbreviatura() {
-        return abreviatura;
+        return this.abreviatura;
     }
 }

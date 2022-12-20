@@ -22,7 +22,7 @@ public class Alojamiento {
     private String caracteristicas = "";
     private TipoServicio servicio;
     private boolean acepracionReserva = false;
-    private String Localidad =  "" ; //TODO
+    private String Localidad =  "" ; 
     private int valoracionGlobal = 0;
     private String anfitrion_email = "";
 
@@ -83,58 +83,58 @@ public class Alojamiento {
     }
     
     public CoordenadasGPS getUbicacionPrecisaGPS() {
-        return ubicacionPrecisaGPS;
+        return this.ubicacionPrecisaGPS;
     }
 
     public Date getFechaEntradda() {
-        return fechaEntradda;
+        return this.fechaEntradda;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public int getMaxHuespedes() {
-        return maxHuespedes;
+        return this.maxHuespedes;
     }
 
     public int getNumDormitorios() {
-        return numDormitorios;
+        return this.numDormitorios;
     }
 
     public int getNumCamas() {
-        return numCamas;
+        return this.numCamas;
     }
 
     public int getNumBaños() {
-        return numBaños;
+        return this.numBaños;
     }
 
     public String getUbicacionDescrita() {
-        return ubicacionDescrita;
+        return this.ubicacionDescrita;
     }
 
     public String getCaracteristicas() {
-        return caracteristicas;
+        return this.caracteristicas;
     }
 
     public TipoServicio getServicio() {
-        return servicio;
+        return this.servicio;
     }
 
     public boolean isAcepracionReserva() {
-        return acepracionReserva;
+        return this.acepracionReserva;
     }
 
     public String getLocalidad() {
-        return Localidad;
+        return this.Localidad;
     }
 
     public int getValoracionGlobal() {
-        return valoracionGlobal;
+        return this.valoracionGlobal;
     }
 
     public String getAnfitrion_email() {
-        return anfitrion_email;
+        return this.anfitrion_email;
     }
 }

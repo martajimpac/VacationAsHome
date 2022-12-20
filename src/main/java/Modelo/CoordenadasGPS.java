@@ -21,10 +21,10 @@ public class CoordenadasGPS {
     }
 
     public int getLongitud() {
-        return longitud;
+        return this.longitud;
     }
 
     public int getLatitud() {
-        return latitud;
+        return this.latitud;
     }
 }

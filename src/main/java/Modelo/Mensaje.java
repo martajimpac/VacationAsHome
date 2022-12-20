@@ -32,18 +32,18 @@ public class Mensaje {
     }
 
     public String getContenido() {
-        return contenido;
+        return this.contenido;
     }
 
     public Date getFechaEnvio() {
-        return fechaEnvio;
+        return this.fechaEnvio;
     }
 
     public String getCliente_email() {
-        return cliente_email;
+        return this.cliente_email;
     }
 
     public String getAnfitrion_email() {
-        return anfitrion_email;
+        return this.anfitrion_email;
     }
 }

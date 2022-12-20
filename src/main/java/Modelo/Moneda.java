@@ -21,11 +21,11 @@ public class Moneda {
     }
 
     public int getCantidad() {
-        return cantidad;
+        return this.cantidad;
     }
 
     public char getSimbolo() {
-        return simbolo;
+        return this.simbolo;
     }
     
 }

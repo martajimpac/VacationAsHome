@@ -88,12 +88,16 @@ public class ControladorReserva extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Se requiere introducir un mensaje para el anfitrion");
             return;
         }
-
+        
+       
+      
         //AHORA SE HACEN COMPROBACIONES LOGICAS, TRAS LAS QUE SE LLAMA A LAS FUNCIONES QUE HAGAN FALTA
         // Funciones de resultado
-        int numlocalidad = comprobarLocalidad(localidad, numhuespedes);
+        int numlocalidad = comprobarLocalidad(localidad, numHuespedesINT, alojamiento);
         int numalojamiento = comprobarAlojamiento(alojamientoSeleccionado, fechaEntrada, fechaSalida);
 
+         //Conseguir los alojamientos que estén en la localidad seleccionada por el usuario
+        
         // Set the content type of the response
         response.setContentType("text/html");
 
@@ -137,20 +141,19 @@ public class ControladorReserva extends HttpServlet {
         //hay que conseguir el email del cliente
         reserva.setFechaEntrada(fechaEntrada);
         reserva.setFechaSalida(fechaSalida);
-        reserva.setNumHuespedes(numHuespedes);
+        reserva.setNumHuespedes(numHuespedesINT);
         
         //Guardamos el mensaje para el anfitrion
         Mensaje mensaje = new Mensaje();
         mensaje.setContenido(mensajeAnfitrion);
-        
-
+    
     }
-
-    //Funciones que dan respuesta tras realizar las comprobaciones pertinentes
+    
+//Funciones que dan respuesta tras realizar las comprobaciones pertinentes
     //Comprobamos si hay alojamientos en la localidad
-    private int comprobarLocalidad(String localidad, int numhuespedes) {
-        
-        if(localidad is in Alojamiento.localidad[]){
+    private int comprobarLocalidad(String localidad, int numhuespedes, Alojamiento alojamiento) {
+        /*
+        if(localidad is alojamiento.localidad[]){
             if(numhuespedes>=1){
                 if(Alojamiento.localidad[localidad].maxHuespedesAlojamiento>=numhuespedes){
                     return 0; //todo bien 
@@ -162,11 +165,12 @@ public class ControladorReserva extends HttpServlet {
             }
         }else{
             return 1; //error localidad inexistente
-        }
+        }*/ return 0;
+        
     }
     //Comprobamos si el alojamiento esta disponible
     private int comprobarAlojamiento(Date alojamientoSeleccionado, Date fechaEntrada, String fechaSalida) {  
-        
+       /*
         if(Alojamiento.nombreApartamento[alojamientoSeleccionado].fechaEntrada.estado != "ocupado" && Alojamiento.nombreApartamento[alojamientoSeleccionado].fechaSalida.estado != "ocupado"){
             if(ModeloReserva.estado != "libre" || fechaEstrada<ModeloReserva.fechaSalida[] || fechaSalida>ModeloReseva.fechaEntrada[]){
                 return 0; //todo bien
@@ -176,6 +180,6 @@ public class ControladorReserva extends HttpServlet {
         }else{
             return 1; //error alojamiento ocupado
         }
-    }
+    */ return 0;
         
 }
