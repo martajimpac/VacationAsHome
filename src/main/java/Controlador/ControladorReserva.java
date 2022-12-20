@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.Date;
+        
+import Modelo.Alojamiento;
+import Modelo.Reserva;
+import Modelo.Mensaje;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,14 +39,19 @@ public class ControladorReserva extends HttpServlet {
         //String email = request.getParameter("email");
         String localidad = request.getParameter("localidad");
         String numHuespedes = request.getParameter("numHuespedes");
-        int numhuespedes = Integer.parseInt(numHuespedes);
-        String alojamientoSeleccionado = request.getParameter("alojamientoSeleccionado");
-        String fechaEntrada = request.getParameter("fechaEntrada");
-        String fechaSalida = request.getParameter("fechaSalida");
+        int numHuespedesINT = Integer.parseInt(numHuespedes);
+        String alojamientoSeleccionado = request.getParameter("alojamientoSeleccionado"); 
+        //String fechaEntrada = request.getParameter("fechaEntrada");
+        //String fechaSalida = request.getParameter("fechaSalida");
+        
         boolean fraccionPago = request.getParameter("fraccionPago") != null; //si se hace con strings hay que hacer comprobacion
         String mensajeAnfitrion = request.getParameter("mensajeAnfitrion");
         
-
+        //convertir las fechas a tipo date
+        Date fechaEntrada  = new Date(1,1,2020);
+        Date fechaSalida = new Date(1,1,2021);
+        
+        
         // Validar input
         if (localidad == null || localidad.trim().length() == 0) {
             // Devolvemos error por no introducir localidad
@@ -95,10 +104,10 @@ public class ControladorReserva extends HttpServlet {
         //Resultado comprobacion localidad
         if(numlocalidad==0){
             //Devolvemos los datos de los alojamientos disponibles para mostrarselos al asuario
-            //ModeloAlojamiento.localidad[localidad].nombre[];
+            //Alojamiento.localidad[localidad].nombre[];
             //ModeloImagen.alojamiento[nombre].imagen[];
-            //ModeloAlojamiento.localodad[localidad].maxHuespedesAlojamiento[];
-            //ModeloAlojamiento.localodad[localidad].valoracionGlobal[];
+            //Alojamiento.localodad[localidad].maxHuespedesAlojamiento[];
+            //Alojamiento.localodad[localidad].valoracionGlobal[];
             
         }else if(numlocalidad==1){
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No hay alojamientos en la localidad introducida, o esta no existe.");
@@ -124,7 +133,16 @@ public class ControladorReserva extends HttpServlet {
         }
 
         //Creamos reserva para el cliente
-        ModeloReserva.contructor(email, alojamiento, fechaEntrada, fechaSalida, numHuespedes, mensajeAnfitrion, fraccionPago, estado="realizada");
+        Reserva reserva = new Reserva(); //email, alojamiento, fechaEntrada, fechaSalida, numHuespedes, mensajeAnfitrion, fraccionPago, estado="realizada"
+        //hay que conseguir el email del cliente
+        reserva.setFechaEntrada(fechaEntrada);
+        reserva.setFechaSalida(fechaSalida);
+        reserva.setNumHuespedes(numHuespedes);
+        
+        //Guardamos el mensaje para el anfitrion
+        Mensaje mensaje = new Mensaje();
+        mensaje.setContenido(mensajeAnfitrion);
+        
 
     }
 
@@ -132,9 +150,9 @@ public class ControladorReserva extends HttpServlet {
     //Comprobamos si hay alojamientos en la localidad
     private int comprobarLocalidad(String localidad, int numhuespedes) {
         
-        if(localidad is in ModeloAlojamiento.localidad[]){
+        if(localidad is in Alojamiento.localidad[]){
             if(numhuespedes>=1){
-                if(ModeloAlojamiento.localidad[localidad].maxHuespedesAlojamiento>=numhuespedes){
+                if(Alojamiento.localidad[localidad].maxHuespedesAlojamiento>=numhuespedes){
                     return 0; //todo bien 
                 }else{
                     return 3; //error disponibilidad
@@ -147,9 +165,9 @@ public class ControladorReserva extends HttpServlet {
         }
     }
     //Comprobamos si el alojamiento esta disponible
-    private int comprobarAlojamiento(String alojamientoSeleccionado, String fechaEntrada, String fechaSalida) {  
+    private int comprobarAlojamiento(Date alojamientoSeleccionado, Date fechaEntrada, String fechaSalida) {  
         
-        if(ModeloAlojamiento.nombreApartamento[alojamientoSeleccionado].fechaEntrada.estado != "ocupado" && ModeloAlojamiento.nombreApartamento[alojamientoSeleccionado].fechaSalida.estado != "ocupado"){
+        if(Alojamiento.nombreApartamento[alojamientoSeleccionado].fechaEntrada.estado != "ocupado" && Alojamiento.nombreApartamento[alojamientoSeleccionado].fechaSalida.estado != "ocupado"){
             if(ModeloReserva.estado != "libre" || fechaEstrada<ModeloReserva.fechaSalida[] || fechaSalida>ModeloReseva.fechaEntrada[]){
                 return 0; //todo bien
             }else{
