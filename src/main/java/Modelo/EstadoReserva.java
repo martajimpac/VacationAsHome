@@ -11,7 +11,7 @@ package Modelo;
 public enum EstadoReserva {
     realizada,
     aceptadaPorElAnfitrion,
-    confrimada,
+    confirmada,
     pagada,
     canceladaPorCliente,
     canceladaPorAnfitrion,
