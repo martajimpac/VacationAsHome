@@ -71,32 +71,32 @@
               <div class="pt-5">
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <form class="row g-4 mt-5">
+                      <form class="row g-4 mt-5" action="ConsultarAlojamientosClienteServlet" method="post">
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
+                            <label class="form-label visually-hidden" for="inputAddress1" name="provincia">Provincia</label>
                             <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
+                            <label class="form-label visually-hidden" for="inputAddress2" name="municipio">Municipio</label>
                             <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputdateOne" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
+                            <input class="form-control input-box form-voyage-control" id="inputdateOne" type="date" name="date1"/><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputDateTwo" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
+                            <input class="form-control input-box form-voyage-control" id="inputDateTwo" type="date" name="date2"/><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
+                            <label class="form-label visually-hidden" for="inputPersonOne" name="numPersonas">Person</label>
                             <select class="form-select form-voyage-select input-box" id="inputPersonOne">
                               <option selected="selected">2 Adults</option>
                               <option>2 Adults 1 children</option>
@@ -105,8 +105,9 @@
                             </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
                           </div>
                         </div>
+                          <%boolean t = false;%>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                            <button class="btn btn-secondary" type="submit">Consultar Alojamientos</button>
+                            <button class="btn btn-secondary" type="submit" name="botonReserva" id="botonReserva" name="botonEmpezarConsulta">Consultar Alojamientos</button>
                         </div>
                       </form>
                     </div>
@@ -150,18 +151,22 @@
       <!-- <section> close ============================-->
       <!-- ============================================-->
 
-
-      <section id="testimonial">
+      <section id="testimonial" name="reservas">
         <div class="container">
           <div class="row h-100">
+          <% t = false; 
+            System.out.println(t);
+             if(t){
+          %>
             <div class="col-lg-7 mx-auto text-center mb-6">
-              <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">Flash Deals</h5>
+              <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3" id="tituloAlojamiento" name="tituloAlojamiento">Tus Posibles Alojamientos</h5>
             </div>
             <div class="col-12">
               <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active" data-bs-interval="10000">
                     <div class="row h-100 align-items-center g-2">
+     
                       <div class="col-md-4 mb-3 mb-md-0 h-100">
                         <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/gallery/maldives.png" alt="..." />
                           <div class="card-img-overlay ps-0"><span class="badge bg-primary ms-3 me-1 p-2"><i class="fas fa-clock me-1"></i><span>20:04:32:21</span></span><span class="badge bg-secondary p-2"><i class="fas fa-bolt me-1"></i><span>trending</span><i class="fas fa-bolt ms-1"> </i></span></div>
@@ -325,9 +330,11 @@
                 </div>
               </div>
             </div>
+            <%}%>
           </div>
         </div>
       </section>
+      
       <!-- ============================================-->
       
       <!-- <section> begin ============================-->

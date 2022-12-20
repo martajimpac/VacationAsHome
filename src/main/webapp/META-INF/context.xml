@@ -25,5 +25,5 @@
     username="mi_usuario_de_MySQL" 
     password="mi_contrasenia_de_MySQL" 
     driverClassName="com.mysql.cj.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1/zerberusbd"/>
+    url="jdbc:mysql://localhost:3306/zerberusbd"/>
 </Context>

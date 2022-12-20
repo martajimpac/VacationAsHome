@@ -151,7 +151,7 @@ public class ReservaServlet extends HttpServlet {
     
     }
     
-//Funciones que dan respuesta tras realizar las comprobaciones pertinentes
+    //Funciones que dan respuesta tras realizar las comprobaciones pertinentes
     //Comprobamos si hay alojamientos en la localidad
     private int comprobarLocalidad(String localidad, int numhuespedes, Alojamiento alojamiento) {
         /*
@@ -170,6 +170,7 @@ public class ReservaServlet extends HttpServlet {
         }*/ return 0;
         
     }
+    
     //Comprobamos si el alojamiento esta disponible
     private int comprobarAlojamiento(Date alojamientoSeleccionado, Date fechaEntrada, String fechaSalida) {  
        /*
@@ -183,5 +184,5 @@ public class ReservaServlet extends HttpServlet {
             return 1; //error alojamiento ocupado
         }
     */ return 0;
-        
+    }
 }
