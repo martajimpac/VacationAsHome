@@ -10,7 +10,7 @@ package Modelo;
  */
 public class Moneda {
     private int cantidad = 0;
-    private char simbolo = '€';
+    private char simbolo = ' ';
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;

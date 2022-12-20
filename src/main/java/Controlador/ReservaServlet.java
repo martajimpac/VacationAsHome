@@ -1,19 +1,21 @@
+package Controlador;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-        
-import Modelo.Alojamiento;
-import Modelo.Reserva;
-import Modelo.Mensaje;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Modelo.Alojamiento;
+import Modelo.Reserva;
+import Modelo.Mensaje;
+
 //ESTE CONTROLADOR NO ES FUNCIONAL, ES LA PRIMERA VERSION
 @WebServlet("/ControladorReserva")
-public class ControladorReserva extends HttpServlet {
+public class ReservaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     //Importamos los modelos que vamos a utilizar para la comprobación de datos
