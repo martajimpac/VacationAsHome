@@ -47,6 +47,8 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
         boolean pulsado = false;
         
         
+        
+        }
    }
 
 
