@@ -22,8 +22,8 @@
     jmxEnabled="true"
     jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
     org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
-    username="mi_usuario_de_MySQL" 
-    password="mi_contrasenia_de_MySQL" 
+    username="root" 
+    password="ASDzxcv" 
     driverClassName="com.mysql.cj.jdbc.Driver"
     url="jdbc:mysql://localhost:3306/zerberusbd"/>
 </Context>

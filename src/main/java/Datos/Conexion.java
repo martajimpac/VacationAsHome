@@ -8,7 +8,6 @@ package Datos;
 /**
  *
  * @author franc
- * @author paula
  */
 
 import java.sql.*;

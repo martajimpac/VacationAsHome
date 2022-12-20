@@ -75,22 +75,30 @@
                 <nav>
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <form class="row g-4 mt-5">
+                      <form class="row g-4 mt-5" method="post" action="LoginServlet">
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputEmail">Email</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Email" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Email" name="email" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputAddress2">Address 2</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="password" placeholder="Password" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="password" placeholder="Password" name="password"/><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
                           </div>
                         </div>
                         
+                        <% String texto = (String)request.getAttribute("showText"); 
+                        System.out.print("texto: " + texto);
+                            if(texto!=null){%>
+                                  <br><h2 class="display-3 fw-normal"><%= texto%></h2>
+                            <%}else{%>
+                                  <p></p>
+                        <%}%>
+                          
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                          <a href="vistaCliente.jsp" class="btn btn-secondary" type="submit">Sign as Client</a>
+                          <button class="btn btn-secondary" type="submit">Sign as Client</button>
                         </div>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
                           <button class="btn btn-secondary" type="submit">Sign as Host</button>

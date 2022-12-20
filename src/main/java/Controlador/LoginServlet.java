@@ -5,9 +5,9 @@
  */
 package Controlador;
 
+import Datos.ClienteDB;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+
 /**
  *
  * @author franc
  */
-@WebServlet(name = "ConsultarAlojamientosClienteServlet", urlPatterns = {"/ConsultarAlojamientosClienteServlet"})
-public class ConsultarAlojamientosClienteServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,32 +36,43 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        // variables que vamos a utilizar
-        String provincia = "";
-        String municipio= "";
-        Date date1 = new Date();
-        Date date2 = new Date();
-        int numPersonas = 0;
-        
-       
-        
-        // una vez se pulse el boton, se captura su evento y se recraga la misma pagina
+        String email = "";
+        String password = "";
+        String texto = "";
+        String nextStep = "/register.jsp";
+        try{
+            /* TODO output your page here. You may use following sample code. */
+            email=request.getParameter("email");
+            password=request.getParameter("password");
+            
+            if(ClienteDB.emailExists(email)){
+                if(ClienteDB.userExists(email, password)){
+                    nextStep = "/vistaCliente.jsp";
+                }else{
+                    texto = "Your password is wrong";
+                }  
+            }else{
+                texto = "You are not registered";
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
         try {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistaCliente.jsp");
-            request.setAttribute("pulsado", "yes");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextStep);
+            request.setAttribute("showText", texto);
             // save in the session the email of the user and 
             // is save in the request object
+            HttpSession session = request.getSession();
+            session.setAttribute("user", email);
             dispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
             System.out.println(e);
         }
-        
-        
-        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -98,7 +111,5 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-   }
 
-
-
+}
