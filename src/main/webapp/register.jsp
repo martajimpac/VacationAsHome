@@ -98,10 +98,10 @@
                         <%}%>
                           
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                          <button class="btn btn-secondary" type="submit">Sign as Client</button>
+                          <button id="client" class="btn btn-secondary" type="submit" value="client">Sign as Client</button>
                         </div>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                          <button class="btn btn-secondary" type="submit">Sign as Host</button>
+                          <button id="adm" class="btn btn-secondary" type="submit" value="adm">Sign as Host</button>
                         </div>
                       </form>
                     </div>

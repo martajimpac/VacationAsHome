@@ -46,7 +46,7 @@ public class ReservaServlet extends HttpServlet {
         //String fechaEntrada = request.getParameter("fechaEntrada");
         //String fechaSalida = request.getParameter("fechaSalida");
         
-        boolean fraccionPago = request.getParameter("fraccionPago") != null; //si se hace con strings hay que hacer comprobacion
+        //boolean fraccionPago = request.getParameter("fraccionPago") != null; //si se hace con strings hay que hacer comprobacion
         String mensajeAnfitrion = request.getParameter("mensajeAnfitrion");
         
         //convertir las fechas a tipo date
@@ -172,7 +172,7 @@ public class ReservaServlet extends HttpServlet {
     }
     
     //Comprobamos si el alojamiento esta disponible
-    private int comprobarAlojamiento(Date alojamientoSeleccionado, Date fechaEntrada, String fechaSalida) {  
+    private int comprobarAlojamiento(String alojamientoSeleccionado, Date fechaEntrada, Date fechaSalida) {  
        /*
         if(Alojamiento.nombreApartamento[alojamientoSeleccionado].fechaEntrada.estado != "ocupado" && Alojamiento.nombreApartamento[alojamientoSeleccionado].fechaSalida.estado != "ocupado"){
             if(ModeloReserva.estado != "libre" || fechaEstrada<ModeloReserva.fechaSalida[] || fechaSalida>ModeloReseva.fechaEntrada[]){

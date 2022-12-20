@@ -21,7 +21,7 @@ public class Alojamiento {
     private String ubicacionDescrita = "";
     private String caracteristicas = "";
     private TipoServicio servicio;
-    private boolean acepracionReserva = false;
+    private boolean aceptacionReserva = false;
     private String Localidad =  "" ; 
     private int valoracionGlobal = 0;
     private String anfitrion_email = "";
@@ -66,8 +66,8 @@ public class Alojamiento {
         this.servicio = servicio;
     }
 
-    public void setAcepracionReserva(boolean acepracionReserva) {
-        this.acepracionReserva = acepracionReserva;
+    public void setAceptacionReserva(boolean acepracionReserva) {
+        this.aceptacionReserva = acepracionReserva;
     }
 
     public void setLocalidad(String Localidad) {
@@ -122,8 +122,8 @@ public class Alojamiento {
         return this.servicio;
     }
 
-    public boolean isAcepracionReserva() {
-        return this.acepracionReserva;
+    public boolean isAceptacionReserva() {
+        return this.aceptacionReserva;
     }
 
     public String getLocalidad() {

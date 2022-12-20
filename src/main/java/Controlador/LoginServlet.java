@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
         String nextStep = "/register.jsp";
         try{
             /* TODO output your page here. You may use following sample code. */
+
             email=request.getParameter("email");
             password=request.getParameter("password");
             
