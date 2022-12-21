@@ -25,7 +25,7 @@ public class AlojamientoDB {
         ResultSet rs = null;
         //buscar alojamientos en la localidad y que tengan espacio para el numero de huespedes introducido
         String query = "SELECT * FROM ALOJAMIENTO a "
-        + "WHERE localidad = ? AND maxHuesped <= ?;";
+        + "WHERE a.localidad = ? AND a.maxHuesped <= ?;";
         
         //Crear las variables
         ArrayList <Alojamiento> alojamientos = new ArrayList();
