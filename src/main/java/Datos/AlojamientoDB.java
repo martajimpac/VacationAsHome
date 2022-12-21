@@ -18,15 +18,15 @@ import java.sql.ResultSet;
  */
 public class AlojamientoDB {
     
-    public static ArrayList <Alojamiento> buscarLocalidadyHuespedes(String direccion, int numHuespedes) {
+    public static ArrayList <Alojamiento> buscarLocalidadyHuespedes(String provincia,String municipio, int numHuespedes) {
         
         Conexion pool = Conexion.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         //buscar alojamientos en la localidad y que tengan espacio para el numero de huespedes introducido
-        String query = "SELECT * FROM ALOJAMIENTO a "
-        + "WHERE a.localidad = ? AND a.maxHuesped <= ?;";
+        String query = "SELECT * FROM ALOJAMIENTO a JOIN LOCALIDAD l"
+        + "WHERE l.provincia = ? AND l.municipio = ? AND a.maxHuesped <= ?;";
         
         //Crear las variables
         ArrayList <Alojamiento> alojamientos = new ArrayList();
@@ -34,11 +34,13 @@ public class AlojamientoDB {
         TipoServicio servicio = null;
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, direccion);
+            ps.setString(1, provincia);
+            ps.setString(1, municipio);
             ps.setInt(1, numHuespedes);
             rs = ps.executeQuery();
             while (rs.next()) {
                 aloj = new Alojamiento();
+                aloj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("a.ubicacionPrecisa"));
                 aloj.setFechaEntrada(rs.getDate("a.fechaEntrada"));
                 aloj.setNombre(rs.getString("a.nombre"));
                 aloj.setMaxHuespedes(rs.getInt("a.maxHuesped"));
@@ -47,13 +49,10 @@ public class AlojamientoDB {
                 aloj.setNumBaños(rs.getInt("a.numBaños"));
                 aloj.setUbicacionDescrita(rs.getString("a.ubicacionDescrita"));
                 aloj.setCaracteristicas(rs.getString("a.caracteriticas"));
-                String string = rs.getString("a.servicios");
-                servicio = TipoServicio.valueOf(string);
-                aloj.setServicio(servicio);
+                aloj.setServicio((TipoServicio) rs.getObject("a.servicio"));
                 aloj.setLocalidad(rs.getString("a.localidad"));
                 aloj.setValoracionGlobal(rs.getInt("a.valoracionGlobal"));
                 aloj.setAnfitrion_email(rs.getString("a.anfitrionEmail"));
-                
                 alojamientos.add(aloj);
             }
             //de aqui tengo que sacar los alojamientos pero no se como
@@ -63,12 +62,13 @@ public class AlojamientoDB {
             return alojamientos;
           
         } catch (Exception e) {
-            System.out.println(e);
             return null;
         }
     }
+    
+    //FALTA COMPROBAR QUE ESTEN EN LA LOCALIDAD INDICADA, creo que falta la R en fecha salida
      public static ArrayList <Alojamiento> consulta(String prov, String muni,Date d1,Date d2,int num) {
-        Conexion pool = Conexion.getInstance();
+        Conexion pool = Conexion.getInstance(); 
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;

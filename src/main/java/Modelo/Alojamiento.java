@@ -22,7 +22,7 @@ public class Alojamiento {
     private String caracteristicas = "";
     private TipoServicio servicio;
     private boolean aceptacionReserva = false;
-    private String Localidad =  "" ; 
+    private Localidad Localidad =  new Localidad(); 
     private int valoracionGlobal = 0;
     private String anfitrion_email = "";
 

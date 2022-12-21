@@ -46,23 +46,20 @@ public class ReservaServlet extends HttpServlet {
        
         try (PrintWriter out = response.getWriter()) {
             
-            String direccion1 = request.getParameter("inputAddress1");
-            String direccion2 = request.getParameter("inputAddress2");
-            String direccion = direccion1 + direccion2;
-            String fechaEntrada = request.getParameter("inputdateOne");
-            String fechaSalida = request.getParameter("inputDateTwo");
+            String provincia = request.getParameter("inputAddress1");
+            String municipio = request.getParameter("inputAddress2");
+            //he quitado la fecha porque se introduce despues en el caso de uso
+           
             int numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
             
             //Comprobar que los campos no estén vacíos
-            if(!"".equals(direccion1) || !"".equals(direccion2)){
+            if(!"".equals(provincia) || !"".equals(municipio)){
                 texto1 = "The address cannot be empty";
             }
-            if(!"".equals(direccion1) || !"".equals(direccion2)){
-                texto2 = "The date cannot be empty";
-            }
+            
              
             //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(direccion,numHuespedes);
+            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
             
           
             if(alojamientos==null){

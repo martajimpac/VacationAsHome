@@ -96,17 +96,7 @@
                             <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
                             <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
                           </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputdateOne" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputDateTwo" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
-                          </div>
-                        </div>
+                        </div>                 
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
