@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Datos.AnfitrionDB;
 import Datos.ClienteDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,16 +49,22 @@ public class LoginServlet extends HttpServlet {
 
             email=request.getParameter("email");
             password=request.getParameter("password");
-            
             if(ClienteDB.emailExists(email)){
-                if(ClienteDB.userExists(email, password)){
-                    nextStep = "/vistaCliente.jsp";
+                    if(ClienteDB.userExists(email, password)){
+                        nextStep = "/vistaCliente.jsp";
+                    }else{
+                        texto = "Your password is wrong";
+                    }  
+                }
+            if(AnfitrionDB.emailExists(email)){
+                    if(AnfitrionDB.userExists(email, password)){
+                        nextStep = "/vistaAnfitrion.jsp";
+                    }else{
+                        texto = "Your password is wrong";
+                    }  
                 }else{
-                    texto = "Your password is wrong";
-                }  
-            }else{
-                texto = "You are not registered";
-            }
+                     texto = "You are not registered";
+                }
         }catch(Exception e){
             System.out.println(e);
         }

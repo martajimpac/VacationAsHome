@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 18 dic. 2022, 15:44:36
+    Document   : register
+    Created on : 18 dic. 2022, 18:04:38
     Author     : franc
 --%>
 
@@ -36,8 +36,8 @@
     <link href="assets/css/theme.css" rel="stylesheet" />
 
   </head>
-
-
+   
+  
   <body>
 
     <!-- ===============================================-->
@@ -45,7 +45,7 @@
     <!-- ===============================================-->
     <main class="main" id="top">
       <nav class="navbar navbar-expand-lg navbar-light py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand" href="reservarCliente.jsp"><img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /><span class="fw-bold text-primary ms-2">VacationAsHome</span></a>
+        <div class="container"><a class="navbar-brand" href="index.jsp"><img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /><span class="fw-bold text-primary ms-2">VacationAsHome</span></a>
           <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto pt-2 pt-lg-0 font-base">
@@ -57,10 +57,6 @@
             <form>
               <a class="nav-item px-2"></a>
               <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Login</span></a>
-            </form>
-              <form>
-              <a class="nav-item px-2"></a>
-              <a href="newRegister.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Sing in</span></a>
             </form>
           </div>
         </div>
@@ -76,48 +72,53 @@
               <h1 class="display-3 text-1000 fw-normal">Let’s make a tour</h1>
               <h1 class="display-3 text-primary fw-bold">Discover the beauty</h1>
               <div class="pt-5">
-                   <div class="tab-content" id="nav-tabContent">
+                <nav>
+                  <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <form class="row g-4 mt-5">
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputdateOne" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputDateTwo" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
-                            <select class="form-select form-voyage-select input-box" id="inputPersonOne">
-                              <option selected="selected">2 Adults</option>
-                              <option>2 Adults 1 children</option>
-                              <option>2 Adults 2 children</option>
-                              
-                            </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
-                          </div>
+                      <form id="fromR" class="row g-4 mt-5" method="post" action="RegisterServlet">
+                        <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
+                          <!---MODIFICADO---->
+                          <button id="client" class="btn btn-secondary" >Sing in as a Client</button>
                         </div>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                            <button class="btn btn-secondary" type="submit">Consultar Alojamientos</button>
+                          <!---MODIFICADO---->
+                          <button id="host" class="btn btn-secondary" >Sing in as a Host</button>
                         </div>
+                          <script>
+                            const miBoton = document.getElementById('host');
+                            const miBoton2 = document.getElementById('client');
+                            const miDiv = document.getElementById('fromR');
+                            miBoton.addEventListener('click', function() {
+                                miDiv.innerHTML ='';
+                                miDiv.innerHTML = '<div class="col-sm-6 col-md-6 col-xl-5"><div class="input-group-icon"><label class="form-label visually-hidden" for="inputEmail">Email</label><input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Email" name="email" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span></div></div>'
++'<div class="col-sm-6 col-md-6 col-xl-5"><div class="input-group-icon"><label class="form-label visually-hidden" for="inputAddress2">Address 2</label><input class="form-control input-box form-voyage-control" id="inputAddress2" type="password" placeholder="Password" name="password"/><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span></div></div>'
++'<div class="col-sm-6 col-md-6 col-xl-5"><div class="input-group-icon"><label class="form-label visually-hidden" for="inputName">Name</label><input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Name" name="name" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span></div></div>'
++'<div class="col-sm-6 col-md-6 col-xl-5"><div class="input-group-icon"><label class="form-label visually-hidden" for="inputIdioma">Idiomas</label><input class="form-control input-box form-voyage-control" id="inputIdioma" type="text" placeholder="Idioma" name="idioma"/><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span></div></div>'
++'<div class="col-12 col-xl-10 col-lg-12 d-grid mt-6"><button name="client" class="btn btn-secondary" type="submit" value="client">Sing in</button></div>'; 
+                            
+                            });
+                            miBoton2.addEventListener('click', function() {
+                                miDiv.innerHTML ='';
+                                miDiv.innerHTML ='<div class="col-sm-6 col-md-6 col-xl-5"><div class="input-group-icon"><label class="form-label visually-hidden" for="inputEmail">Email</label><input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Email" name="email" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span></div></div>'
++'<div class="col-sm-6 col-md-6 col-xl-5"><div class="input-group-icon"><label class="form-label visually-hidden" for="inputAddress2">Address 2</label><input class="form-control input-box form-voyage-control" id="inputAddress2" type="password" placeholder="Password" name="password"/><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span></div></div>'
++'<div class="col-12 col-xl-10 col-lg-12 d-grid mt-6"><button name="client" class="btn btn-secondary" type="submit" value="client">Sing in</button></div>';
+                              
+                            });
+                          </script>
+                        
+                        <% String texto = (String)request.getAttribute("showText"); 
+                        System.out.print("texto: " + texto);
+                            if(texto!=null){%>
+                                  <br><h2 class="display-3 fw-normal"><%= texto%></h2>
+                            <%}else{%>
+                                  <p></p>
+                        <%}%>
+                          
                       </form>
                     </div>
-                </div>
+                   
+                  </div>
+                </nav>
               </div>
             </div>
           </div>
@@ -334,7 +335,8 @@
             </div>
           </div>
         </div>
-      </section> 
+      </section>
+      
       
       <!-- <section> begin ============================-->
       <section class="py-0 overflow-hidden">
@@ -378,8 +380,6 @@
     <!-- ===============================================-->
 
 
-
-
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
@@ -389,9 +389,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="vendors/fontawesome/all.min.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/main.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script data-main="libs/main" src="libs/require.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
   </body>
