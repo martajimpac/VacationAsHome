@@ -78,11 +78,8 @@
                    <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <!-- MODIFICACION===============================================-->
-                        <form class="row g-4 mt-5" method="post" action="ReservarServlet">
-                        <select name="method">
-                        <option value="1">Method 1</option>
-                        </select>
-                            
+                        <form class="row g-4 mt-5" method="post" action="ReservaServlet">
+                        <input type="hidden" id="method" name="method" value="1">  
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
@@ -117,7 +114,7 @@
                           </div>
                         </div>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                            <button class="btn btn-secondary" type="submit">Consultar Alojamientos</button>
+                            <button class="btn btn-secondary" type="submit">Reservar Alojamientos</button>
                         </div>
                       </form>
                     </div>

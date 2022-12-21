@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author marta
  */
-@WebServlet(name = "ReservaServlet2", urlPatterns = {"/ReservaServlet2"})
+@WebServlet(name = "ReservaServlet", urlPatterns = {"/ReservaServlet"})
 public class ReservaServlet extends HttpServlet {
 
     /**
@@ -43,9 +43,7 @@ public class ReservaServlet extends HttpServlet {
         String nombre = new String();
         int maxHuesp = 0;
         int valoracion = 0;
-        Imagen foto = new Imagen();
-        String siguiente = "";
-        
+       
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
@@ -56,6 +54,8 @@ public class ReservaServlet extends HttpServlet {
             
             //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
             alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(direccion,numHuespedes);
+            
+            out.println(alojamientos);
             if(alojamientos==null){
                 texto = "There is no accommodation that matches your search";
             }
@@ -65,14 +65,16 @@ public class ReservaServlet extends HttpServlet {
         }
         
         try { //Para actualizar la vista
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistaCliente.jsp");
+            
             /*//mostrar el texto
             request.setAttribute("showText", texto);
             //mostrar alojamientos solo si hay resultados para la búsqueda
             request.setAttribute("correcto", request.getParameter("inputAddress1")); 
             //mandar lista de alojamientos*/
-            request.setAttribute("alojamientos", alojamientos);
             
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
+            request.setAttribute("alojamientos", alojamientos);
+      
             dispatcher.forward(request, response);
         } catch (IOException | ServletException e) {
             System.out.println(e);
