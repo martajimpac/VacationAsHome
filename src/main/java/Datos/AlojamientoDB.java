@@ -4,6 +4,7 @@
  */
 package Datos;
 import Modelo.Alojamiento;
+import Modelo.CoordenadasGPS;
 import Modelo.TipoServicio;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,5 +67,44 @@ public class AlojamientoDB {
             return null;
         }
     }
-    
+     public static ArrayList <Alojamiento> consulta(String prov, String muni,Date d1,Date d2,int num) {
+        Conexion pool = Conexion.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM ALOJAMIENTO A JOIN RESERVA r "
+        + "WHERE A.MAXHUESPED >= ? AND A.ACEPTACIONRESERVA=FALSE AND R.FECHAENTRADA>? AND FECHASALIDA<?;";
+        
+        try {
+             ArrayList<Alojamiento>lista= new ArrayList<Alojamiento>() ;
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, num);
+            ps.setDate(2, (java.sql.Date) d1);
+            ps.setDate(3, (java.sql.Date) d2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Alojamiento alj = new Alojamiento();
+                alj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("UBICACIONPRECISA"));
+                alj.setFechaEntrada(rs.getDate("FECHAENTRADA"));
+                alj.setNombre(rs.getString("NOMBRE"));
+                alj.setMaxHuespedes(rs.getInt("MAXHUESPED"));
+                alj.setNumDormitorios(rs.getInt("NUMDORMITORIOS"));
+                alj.setNumCamas(rs.getInt("NUMCAMAS"));
+                alj.setNumBaños(rs.getInt("NUMBAÑOS"));
+                alj.setUbicacionDescrita(rs.getString("UBICACIONDESCRITA"));
+                alj.setCaracteristicas(rs.getString("CARACTERISTICAS"));
+                alj.setServicio((TipoServicio) rs.getObject("SERVICIO"));
+                alj.setLocalidad(rs.getString("LOCALIDAD"));
+                alj.setValoracionGlobal(rs.getInt("VALORACIONGLOBAL"));
+                alj.setAnfitrion_email(rs.getString("ANFITRION_EMAIL"));
+                lista.add(alj);
+            }
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return lista;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

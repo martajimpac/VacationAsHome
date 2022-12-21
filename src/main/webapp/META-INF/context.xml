@@ -23,6 +23,6 @@
     jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
     org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
     username="root" 
-    password="ASDzxcv" 
+    password="830912FpD@" 
     driverClassName="com.mysql.cj.jdbc.Driver"
     url="jdbc:mysql://localhost:3306/zerberusbd"/></Context>

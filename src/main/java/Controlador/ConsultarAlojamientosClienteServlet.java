@@ -5,8 +5,11 @@
  */
 package Controlador;
 
+import Modelo.Alojamiento;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +17,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -41,16 +43,31 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
         // variables que vamos a utilizar
         String provincia = "";
         String municipio= "";
-        Date date1 = new Date();
-        Date date2 = new Date();
+        String date1 = "";
+        String date2 = "";
         int numPersonas = 0;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList <Alojamiento> Aloj= new ArrayList <>();
+        try{
+            /* TODO output your page here. You may use following sample code. */
+            provincia=request.getParameter("inputAddress1");
+            municipio=request.getParameter("inputAddress2");
+            date1 = request.getParameter("inputdateOne");
+            Date d1 = dateFormat.parse(date1);
+            date2 = request.getParameter("inputDateTwo");
+            Date d2 = dateFormat.parse(date2);
+            numPersonas = Integer.parseInt(request.getParameter("inputPersonOne"));
+
+            Aloj=Datos.AlojamientoDB.consulta(provincia,municipio,d1,d2,numPersonas);
+        }catch(Exception e){
+            System.out.println(e);
+        }
         
-       
         
         // una vez se pulse el boton, se captura su evento y se recraga la misma pagina
         try {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistaCliente.jsp");
-            request.setAttribute("pulsado", "yes");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/consulta.jsp");
+            request.setAttribute("Aloj", Aloj);
             // save in the session the email of the user and 
             // is save in the request object
             dispatcher.forward(request, response);

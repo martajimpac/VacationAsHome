@@ -4,6 +4,8 @@
     Author     : franc
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Modelo.Alojamiento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -61,66 +63,63 @@
           </div>
         </div>
       </nav>
-      <section class="mt-7 py-0">
-        <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/hero-section-1.png);">
-        </div>
-        <!--/.bg-holder-->
-
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 py-5 py-xl-5 py-xxl-7">
-              <h1 class="display-3 text-1000 fw-normal">Let’s make a tour</h1>
-              <h1 class="display-3 text-primary fw-bold">Discover the beauty</h1>
-              <div class="pt-5">
-                   <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <form class="row g-4 mt-5" action="ConsultarAlojamientosClienteServlet">
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress1" name="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress2" name="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                              <input class="form-control input-box form-voyage-control" id="inputdateOne" name="inputdateOne" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <input class="form-control input-box form-voyage-control" id="inputDateTwo" name="inputDateTwo" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
-                          </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-xl-5">
-                          <div class="input-group-icon">
-                            <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
-                            <select class="form-select form-voyage-select input-box" id="inputPersonOne" name="inputPersonOne">
-                                <option selected="selected" value="2">2 Adults</option>
-                              <option value="3">2 Adults 1 children</option>
-                              <option value="4">2 Adults 2 children</option>
-                              
-                            </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
-                          </div>
-                        </div>
-                        <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                            <button class="btn btn-secondary" type="submit">Consultar Alojamientos</button>
-                        </div>
-                      </form>
-                    </div>
+    <form action="AdminServlet" method="post" name="formulation">
+            <% ArrayList<Alojamiento> dataList= (ArrayList<Alojamiento>)request.getAttribute("Aloj");
+                            for(int i=0; i<dataList.size(); i++){
+                                Alojamiento r = dataList.get(i);
+                        %>
+             <article class="item item-multimedia-container" data-adid="92726554">
+                <picture class="item-multimedia ">
+                <div class="item-ribbon-container">
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
+                <div class="item-gallery gallery-height-core-vitals neutral-orientation">
+                <div class="mask-wrapper is-clickable initialized">
+                <div class="gallery-tap left"></div>
+                <div class="gallery-arrow left icon-arrow-left" style="visibility: hidden;"></div>
+                <div class="mask galleryBoost" style="touch-action: pan-y; user-select: none; transition-duration: 0s; transform: translateX(0px);">
+                <div class="placeholder" style="transform: translateX(-300px);"></div>
+                <div class="placeholder" style="transform: translateX(0px);">
+                </div>
+                <div class="placeholder" style="transform: translateX(300px);"><img src="https://img3.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/6c/57/47/846614101.jpg" style="visibility: visible;" alt="" width="300" height="225"></div>
+                </div>
+                <div class="gallery-tap right"></div>
+                <div class="gallery-arrow right icon-arrow-right" style="visibility: visible;"></div>
+                </div>
+                </div>
+                </picture>
+                <div class="item-info-container">
+                <a href="/inmueble/92726554/" role="heading" aria-level="2" class="item-link" title="Habitación en calle Virgen del Val, 5, Val, Alcalá de Henares">
+                <%= r.getUbicacionDescrita() %>
+                </a>
+                <div class="price-row ">
+                <span class="item-price h2-simulated">?<span class="txt-big">€/mes</span></span>
+                </div>
+                <div class="item-detail-char">
+                <span class="item-detail"><%= r.getNumDormitorios() %></span>
+                <span class="item-detail"><span class="icon-sex-circle boy"></span> <%=r.getNumCamas()%> <span>camas</span></span>
+                <span class="item-detail"><span class="icon-no-smoking"></span> <%=r.getNumBaños()%><span>baños</span><</span>
+                </div>
+                <div class="item-description description">
+                <p class="ellipsis ">
+                    <%= r.getCaracteristicas() %>
+                    <%= r.getServicio() %>
+                    <%= r.getValoracionGlobal() %>
+                </p>
+                </div>
+                <div class="item-toolbar">
+                <button class="icon-chat email-btn action-email fake-anchor"><span>Contactar</span></button>
+                <button title="Guardar" class=" favorite-btn action-fav fake-anchor" data-role="add" data-text-add="Guardar" data-text-remove="Favorito">
+                <i class="icon-heart" role="img"></i>
+                <span>Guardar</span>
+                </button>
+                <button class="icon-delete trash-btn action-discard fake-anchor" data-role="add" title="Descartar" data-text-remove="Descartar" rel="nofollow">
+                </button>
+                </div>
+                </div>
+            </article>
+         <%}
+         %>
+    </form>
       <!-- ============================================-->
       <!-- <section> begin ============================-->
       <section class="py-0 overflow-hidden">

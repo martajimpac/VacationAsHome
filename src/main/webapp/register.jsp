@@ -54,10 +54,6 @@
               <li class="nav-item px-2"><a class="nav-link"> <span class="nav-link-icon text-800 me-1 fas fa-hotel"></span><span class="nav-link-text"></span></a></li>
               <li class="nav-item px-2"><a class="nav-link"><span class="nav-link-icon text-800 me-1 fas fa-bolt"></span><span class="nav-link-text"></span></a></li>
             </ul>
-            <form>
-              <a class="nav-item px-2"></a>
-              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Sign in</span></a>
-            </form>
           </div>
         </div>
       </nav>
@@ -98,9 +94,7 @@
                             <%}%>
                           
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
-                          <button class="btn btn-secondary" type="submit">Login As Client </button>
-                          <div class="col-12 col-xl-10 col-lg-12 d-grid mt-1"></div>
-                          <button class="btn btn-secondary" type="submit">Login As Host</button>
+                          <button class="btn btn-secondary" type="submit">Login </button>
                         </div>
                       </form>
                     </div>
