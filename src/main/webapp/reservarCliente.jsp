@@ -42,7 +42,6 @@
 
 
   <body>
-      <h1> Esto es una variable request ${correcto}</h1>
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
@@ -65,10 +64,10 @@
         </div>
       </nav>
   
-      <% 
-          System.out.println("hola");
-          boolean busqueda = true;
-      if(busqueda){ %>  
+        <!-- PARA VER LA VARIABLE PULSADO -->
+        <h4> Esto es una variable request ${pulsado}}</h4>
+      <% String correcto = (String)request.getAttribute("correcto"); 
+         if(correcto!="yes"){ %>  
       <section class="mt-7 py-0">
         <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/hero-section-1.png);">
         </div>
@@ -84,6 +83,7 @@
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <!-- MODIFICACION===============================================-->
                         <form class="row g-4 mt-5" method="post" action="ReservaServlet">
+                        <!-- Para diferenciar entre diferentes formularios===============================================-->
                         <input type="hidden" id="method" name="method" value="1">  
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">

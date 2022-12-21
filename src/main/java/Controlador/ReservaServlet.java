@@ -38,44 +38,60 @@ public class ReservaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //variables que vamos a usar
-        String texto = new String();
+        String texto1 = new String();
+        String texto2 = new String();
+        String texto3 = new String();
         ArrayList<Alojamiento> alojamientos = new ArrayList();
-        String nombre = new String();
-        int maxHuesp = 0;
-        int valoracion = 0;
+        String correcto = "";
        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             
             String direccion1 = request.getParameter("inputAddress1");
             String direccion2 = request.getParameter("inputAddress2");
             String direccion = direccion1 + direccion2;
+            String fechaEntrada = request.getParameter("inputdateOne");
+            String fechaSalida = request.getParameter("inputDateTwo");
             int numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
             
+            //Comprobar que los campos no estén vacíos
+            if(!"".equals(direccion1) || !"".equals(direccion2)){
+                texto1 = "The address cannot be empty";
+            }
+            if(!"".equals(direccion1) || !"".equals(direccion2)){
+                texto2 = "The date cannot be empty";
+            }
+             
             //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
             alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(direccion,numHuespedes);
             
-            out.println(alojamientos);
+          
             if(alojamientos==null){
-                texto = "There is no accommodation that matches your search";
+                texto3 = "There is no accommodation that matches your search";
+            }else{
+                correcto = "true";
             }
             
         }catch(Exception e){
             System.out.println(e);
         }
         
-        try { //Para actualizar la vista
+        try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            /*//mostrar el texto
-            request.setAttribute("showText", texto);
+            //mostrar el textorequest.setAttribute("showText", texto4);
+            request.setAttribute("showText1", texto1);
+            request.setAttribute("showText2", texto2);
+            request.setAttribute("showText3", texto3);
+            
+             //mandar lista de alojamientos*/
+             request.setAttribute("alojamientos", alojamientos);
+             
             //mostrar alojamientos solo si hay resultados para la búsqueda
-            request.setAttribute("correcto", request.getParameter("inputAddress1")); 
-            //mandar lista de alojamientos*/
+            request.setAttribute("correcto", correcto); 
+           
             
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
-            request.setAttribute("alojamientos", alojamientos);
-      
             dispatcher.forward(request, response);
+            
         } catch (IOException | ServletException e) {
             System.out.println(e);
         }
