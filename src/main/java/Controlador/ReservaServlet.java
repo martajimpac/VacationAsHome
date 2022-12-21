@@ -65,12 +65,12 @@ public class ReservaServlet extends HttpServlet {
         }
         
         try { //Para actualizar la vista
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
-            //mostrar el texto
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistaCliente.jsp");
+            /*//mostrar el texto
             request.setAttribute("showText", texto);
             //mostrar alojamientos solo si hay resultados para la búsqueda
-            request.setAttribute("correcto", siguiente); 
-            //mandar lista de alojamientos
+            request.setAttribute("correcto", request.getParameter("inputAddress1")); 
+            //mandar lista de alojamientos*/
             request.setAttribute("alojamientos", alojamientos);
             
             dispatcher.forward(request, response);

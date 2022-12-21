@@ -98,6 +98,7 @@
                         <%}%>
                           
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
+                          <!---MODIFICADO---->
                           <button id="client" class="btn btn-secondary" type="submit" value="client">Sign as Client</button>
                         </div>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">

@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Alojamiento {
     private CoordenadasGPS ubicacionPrecisaGPS = new CoordenadasGPS();
-    private Date fechaEntradda = new Date();
+    private Date fechaEntrada = new Date();
     private String nombre = "";
     private int maxHuespedes = 0;
     private int numDormitorios = 0;
@@ -30,8 +30,8 @@ public class Alojamiento {
         this.ubicacionPrecisaGPS = ubicacionPrecisaGPS;
     }
 
-    public void setFechaEntradda(Date fechaEntradda) {
-        this.fechaEntradda = fechaEntradda;
+    public void setFechaEntrada(Date fechaEntradda) {
+        this.fechaEntrada = fechaEntradda;
     }
 
     public void setNombre(String nombre) {
@@ -87,7 +87,7 @@ public class Alojamiento {
     }
 
     public Date getFechaEntradda() {
-        return this.fechaEntradda;
+        return this.fechaEntrada;
     }
 
     public String getNombre() {
