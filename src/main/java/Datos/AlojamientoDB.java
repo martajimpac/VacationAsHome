@@ -73,7 +73,7 @@ public class AlojamientoDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String query = "SELECT * FROM ALOJAMIENTO A JOIN RESERVA r "
-        + "WHERE A.MAXHUESPED >= ? AND A.ACEPTACIONRESERVA=FALSE AND R.FECHAENTRADA>? AND FECHASALIDA<?;";
+        + "WHERE A.MAXHUESPED >= ? AND A.ACEPTACIONRESERVA=FALSE OR R.FECHAENTRADA>? AND FECHASALIDA<?;";
         
         try {
              ArrayList<Alojamiento>lista= new ArrayList<Alojamiento>() ;
