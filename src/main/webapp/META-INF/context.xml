@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/proyectoPDSC">
-  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" initialSize="10" jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;     org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" jmxEnabled="true" logAbandoned="true" maxActive="100" maxWait="10000" minEvictableIdleTimeMillis="30000" minIdle="10" name="jdbc/zerberusbd" password="ASDzxcv" removeAbandoned="true" removeAbandonedTimeout="60" testOnBorrow="true" testOnReturn="false" testWhileIdle="true" timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/zerberusbd" username="root" validationInterval="30000" validationQuery="SELECT 1"/>
-</Context>
+<Resource 
+    name="jdbc/zerberusbd" 
+    auth="Container" 
+    type="javax.sql.DataSource"
+    factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
+    testWhileIdle="true"
+    testOnBorrow="true" 
+    testOnReturn="false" 
+    validationQuery="SELECT 1"
+    validationInterval="30000" 
+    timeBetweenEvictionRunsMillis="30000"
+    maxActive="100" 
+    minIdle="10" 
+    maxWait="10000" 
+    initialSize="10"
+    removeAbandonedTimeout="60" 
+    removeAbandoned="true" 
+    logAbandoned="true"
+    minEvictableIdleTimeMillis="30000" 
+    jmxEnabled="true"
+    jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
+    org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+    username="root" 
+    password="ASDzxcv" 
+    driverClassName="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/zerberusbd"/></Context>

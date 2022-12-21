@@ -58,10 +58,6 @@
               <a class="nav-item px-2"></a>
               <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Login</span></a>
             </form>
-              <form>
-              <a class="nav-item px-2"></a>
-              <a href="newRegister.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Sing in</span></a>
-            </form>
           </div>
         </div>
       </nav>

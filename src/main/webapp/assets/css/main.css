@@ -10,5 +10,13 @@ and open the template in the editor.
 
 /* imagen de icono en ventana Registrado */ 
 #iconoRegister{
-    width : 20px
+    width : 20px;
+}
+
+#caracteristicasAlojamiento{
+    display: none;
+}
+
+#caracteristicasAlojamiento p{
+    color: mediumseagreen;
 }

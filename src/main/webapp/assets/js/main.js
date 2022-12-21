@@ -1,13 +1,9 @@
-
-
-function showText(text){
-    if(text!==null){
-        Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: text,
-        showConfirmButton: false,
-        timer: 1500
-      })
+// mostrar las caracteriticas de los apartamentos
+function mostrar() {
+    var x = document.getElementById('caracteristicasAlojamiento');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
     }
 }
