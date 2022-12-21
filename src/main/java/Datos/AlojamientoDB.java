@@ -4,6 +4,7 @@
  */
 package Datos;
 import Modelo.Alojamiento;
+import Modelo.TipoServicio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
@@ -18,7 +19,6 @@ public class AlojamientoDB {
     
     public static ArrayList <Alojamiento> buscarLocalidadyHuespedes(String direccion, int numHuespedes) {
         
-        
         Conexion pool = Conexion.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
@@ -30,6 +30,7 @@ public class AlojamientoDB {
         //Crear las variables
         ArrayList <Alojamiento> alojamientos = new ArrayList();
         Alojamiento aloj = null;
+        TipoServicio servicio = null;
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, direccion);
@@ -37,7 +38,6 @@ public class AlojamientoDB {
             rs = ps.executeQuery();
             while (rs.next()) {
                 aloj = new Alojamiento();
-                //aloj.setUbicacionPrecisaGPS(rs.getString("a.ubicacionPrecisaGPS"));
                 aloj.setFechaEntrada(rs.getDate("a.fechaEntrada"));
                 aloj.setNombre(rs.getString("a.nombre"));
                 aloj.setMaxHuespedes(rs.getInt("a.maxHuesped"));
@@ -45,12 +45,13 @@ public class AlojamientoDB {
                 aloj.setNumCamas(rs.getInt("a.numCamas"));
                 aloj.setNumBaños(rs.getInt("a.numBaños"));
                 aloj.setUbicacionDescrita(rs.getString("a.ubicacionDescrita"));
-                //aloj.setCaracteristicas(rs.getString("a.caracteriticas"));
-                //aloj.setServicio("a.UbicacionPrecisaGPS");
-                //aloj.setAceptacionReserva("a.UbicacionPrecisaGPS");
-                //aloj.setLocalidad("a.UbicacionPrecisaGPS");
-                //aloj.setValoracionGlobal(infpriv);
-                //aloj.setAnfitrion_email(infpriv);
+                aloj.setCaracteristicas(rs.getString("a.caracteriticas"));
+                String string = rs.getString("a.servicios");
+                servicio = TipoServicio.valueOf(string);
+                aloj.setServicio(servicio);
+                aloj.setLocalidad(rs.getString("a.localidad"));
+                aloj.setValoracionGlobal(rs.getInt("a.valoracionGlobal"));
+                aloj.setAnfitrion_email(rs.getString("a.anfitrionEmail"));
                 
                 alojamientos.add(aloj);
             }

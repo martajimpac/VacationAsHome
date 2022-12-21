@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList" %>
+<%@page import="Modelo.Alojamiento" %>
+<%@page import="Datos.AlojamientoDB" %>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -61,8 +64,10 @@
           </div>
         </div>
       </nav>
-        
-      <% boolean busqueda = true;
+  
+      <% 
+          System.out.println("hola");
+          boolean busqueda = true;
       if(busqueda){ %>  
       <section class="mt-7 py-0">
         <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/hero-section-1.png);">
