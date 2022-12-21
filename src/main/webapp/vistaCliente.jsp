@@ -181,7 +181,7 @@
 
                                 <div class="card-img-overlay ps-0">
                                     <a href="reservarCliente.jsp"><button class="btn btn-secondary ms-3 me-1 p-2" type="submit">Reservar</button></a>
-                                    <a href="#caracteristicasAlojamiento" ><button class="btn btn-secondary ms-3 me-1 p-2" type="button" onclick="mostrar()">Mas Info</button></a>
+                                    <a href="#caracteristicasAlojamiento" id="masInfo"><button class="btn btn-secondary ms-3 me-1 p-2" type="button" onclick="mostrar()">Mas Info</button></a>
                                 </div>
                               <div class="card-body ps-0">
                                 <h5 class="fw-bold text-1000 mb-4 text-truncate">Mermaid Beach Resort: The most joyful way to spend your holiday</h5>

@@ -7,3 +7,7 @@ function mostrar() {
         x.style.display = 'none';
     }
 }
+
+$("#masInfo").click(function(){
+    mostrar();
+});
