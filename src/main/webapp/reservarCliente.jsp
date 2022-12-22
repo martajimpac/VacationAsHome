@@ -101,9 +101,11 @@
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
                             <select class="form-select form-voyage-select input-box" id="inputPersonOne">
-                              <option selected="selected">2 Adults</option>
-                              <option>2 Adults 1 children</option>
-                              <option>2 Adults 2 children</option>
+                              <option selected="selected">1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
                               
                             </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
                           </div>
