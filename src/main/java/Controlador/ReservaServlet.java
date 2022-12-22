@@ -39,11 +39,8 @@ public class ReservaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //variables que vamos a usar
-        String texto1 = new String();
-        String texto2 = new String();
-        String texto3 = new String();
         ArrayList<Alojamiento> alojamientos = new ArrayList();
-        String correcto = "";
+        ArrayList<Imagen> imagenes = new ArrayList();
        
         try (PrintWriter out = response.getWriter()) {
             
@@ -55,7 +52,7 @@ public class ReservaServlet extends HttpServlet {
             
             //Comprobar que los campos no estén vacíos
             if(!"".equals(provincia) || !"".equals(municipio)){
-                texto1 = "The address cannot be empty";
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "The address cannot be empty");
             }
             
              
@@ -64,9 +61,12 @@ public class ReservaServlet extends HttpServlet {
             
           
             if(alojamientos==null){
-                texto3 = "There is no accommodation that matches your search";
-            }else{
-                correcto = "true";
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
+            }
+
+            for(i in alojamientos){
+                //Conseguir la lista de imagenes de los alojamientos
+                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
             }
             
         }catch(Exception e){
@@ -75,19 +75,14 @@ public class ReservaServlet extends HttpServlet {
         
         try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            //mostrar el textorequest.setAttribute("showText", texto4);
-            request.setAttribute("showText1", texto1);
-            request.setAttribute("showText2", texto2);
-            request.setAttribute("showText3", texto3);
-            
-             //mandar lista de alojamientos*/
-             request.setAttribute("alojamientos", alojamientos);
-             
-            //mostrar alojamientos solo si hay resultados para la búsqueda
-            request.setAttribute("correcto", correcto); 
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
+
+            //mandar lista de alojamientos*/
+            request.setAttribute("alojamientos", alojamientos);
+            //mandar lista de imagenes*/
+            request.setAttribute("imagenes", imagenes);
            
             
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
             dispatcher.forward(request, response);
             
         } catch (IOException | ServletException e) {
