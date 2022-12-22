@@ -40,11 +40,11 @@ public class ImagenDB {
             while (rs.next()) {
                 im = new Imagen();
                 im.setEtiqueta(rs.getString("i.etiqueta"));
-                im.setImagen(rs.getString("i.imagen"));
+                im.setImagen(rs.getBLOB("i.imagen"));
                 
                 imagenes.add(im);
             }
-            //de aqui tengo que sacar los alojamientos pero no se como
+            //cerramos
             rs.close();
             ps.close();
             pool.freeConnection(connection);
