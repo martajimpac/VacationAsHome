@@ -15,7 +15,7 @@ public class Precio {
     private Moneda precioMes = new Moneda();
     private Date fechaIncio  = new Date();
     private Date fechaFin  = new Date();
-    private String alojamiento_ubicacion_precisa = "";
+    private GPS alojamiento_ubicacion_precisa = null;
     private String alojamiento_anfitrion_email = "";
 
     public void setPrecioNoche(Moneda precioNoche) {
@@ -38,7 +38,7 @@ public class Precio {
         this.fechaFin = fechaFin;
     }
 
-    public void setAlojamiento_ubicacion_precisa(String alojamiento_ubicacion_precisa) {
+    public void setAlojamiento_ubicacion_precisa(GPS alojamiento_ubicacion_precisa) {
         this.alojamiento_ubicacion_precisa = alojamiento_ubicacion_precisa;
     }
 
@@ -66,7 +66,7 @@ public class Precio {
         return this.fechaFin;
     }
 
-    public String getAlojamiento_ubicacion_precisa() {
+    public GPS getAlojamiento_ubicacion_precisa() {
         return this.alojamiento_ubicacion_precisa;
     }
 

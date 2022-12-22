@@ -11,7 +11,7 @@ import java.util.Date;
  * @author marta
  */
 public class Alojamiento {
-    private CoordenadasGPS ubicacionPrecisaGPS = new CoordenadasGPS();
+    private GPS ubicacionPrecisaGPS = new GPS();
     private Date fechaEntrada = new Date();
     private String nombre = "";
     private int maxHuespedes = 0;
@@ -26,7 +26,7 @@ public class Alojamiento {
     private int valoracionGlobal = 0;
     private String anfitrion_email = "";
 
-    public void setUbicacionPrecisaGPS(CoordenadasGPS ubicacionPrecisaGPS) {
+    public void setUbicacionPrecisaGPS(GPS ubicacionPrecisaGPS) {
         this.ubicacionPrecisaGPS = ubicacionPrecisaGPS;
     }
 
@@ -82,7 +82,7 @@ public class Alojamiento {
         this.anfitrion_email = anfitrion_email;
     }
     
-    public CoordenadasGPS getUbicacionPrecisaGPS() {
+    public GPS getUbicacionPrecisaGPS() {
         return this.ubicacionPrecisaGPS;
     }
 

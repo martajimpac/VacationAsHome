@@ -13,7 +13,7 @@ import java.sql.Blob;
 public class Imagen {
    private String etiqueta = "";
    private Blob imagen;
-   private CoordenadasGPS alojamiento_ubicacionPrecisa = null;
+   private GPS alojamiento_ubicacionPrecisa = null;
    private String alojamiento_anfitrion_email = "";
 
     public void setEtiqueta(String etiqueta) {
@@ -24,7 +24,7 @@ public class Imagen {
         this.imagen = imagen;
     }
 
-    public void setAlojamiento_ubicacionPrecisa(CoordenadasGPS alojamiento_ubicacionPrecisa) {
+    public void setAlojamiento_ubicacionPrecisa(GPS alojamiento_ubicacionPrecisa) {
         this.alojamiento_ubicacionPrecisa = alojamiento_ubicacionPrecisa;
     }
 
@@ -40,7 +40,7 @@ public class Imagen {
         return this.imagen;
     }
 
-    public CoordenadasGPS getAlojamiento_ubicacionPrecisa() {
+    public GPS getAlojamiento_ubicacionPrecisa() {
         return this.alojamiento_ubicacionPrecisa;
     }
 

@@ -4,7 +4,7 @@
  */
 package Datos;
 import Modelo.Alojamiento;
-import Modelo.CoordenadasGPS;
+import Modelo.GPS;
 import Modelo.Imagen;
 import Modelo.Localidad;
 import Modelo.TipoServicio;
@@ -43,7 +43,7 @@ public class AlojamientoDB {
             rs = ps.executeQuery();
             while (rs.next()) {
                 aloj = new Alojamiento();
-                aloj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("ubicacionPrecisa"));
+                aloj.setUbicacionPrecisaGPS((GPS) rs.getObject("ubicacionPrecisa"));
                 aloj.setFechaEntrada(rs.getDate("fechaEntrada"));
                 aloj.setNombre(rs.getString("nombre"));
                 aloj.setMaxHuespedes(rs.getInt("maxHuesped"));
@@ -89,9 +89,9 @@ public class AlojamientoDB {
                 Imagen img = new Imagen();
                 img.setImagen(rs.getBlob("IMAGEN"));
                 img.setEtiqueta(rs.getString("ETIQUETA"));
-                img.setAlojamiento_ubicacionPrecisa((CoordenadasGPS) rs.getObject("ALOJAMIENTO_UBICACIONPRECISA"));
+                img.setAlojamiento_ubicacionPrecisa((GPS) rs.getObject("ALOJAMIENTO_UBICACIONPRECISA"));
                 Alojamiento alj = new Alojamiento();
-                alj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("UBICACIONPRECISA"));
+                alj.setUbicacionPrecisaGPS((GPS) rs.getObject("UBICACIONPRECISA"));
                 alj.setFechaEntrada(rs.getDate("FECHAENTRADA"));
                 alj.setNombre(rs.getString("NOMBRE"));
                 alj.setMaxHuespedes(rs.getInt("MAXHUESPED"));
