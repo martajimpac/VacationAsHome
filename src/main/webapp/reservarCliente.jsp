@@ -7,7 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList" %>
 <%@page import="Modelo.Alojamiento" %>
+<%@page import="Modelo.Imagen" %>
 <%@page import="Datos.AlojamientoDB" %>
+<%@page import="Datos.ImagenDB" %>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
