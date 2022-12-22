@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Modelo.Alojamiento;
 import Modelo.Imagen;
 import Datos.AlojamientoDB;
+import Datos.ImagenDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
