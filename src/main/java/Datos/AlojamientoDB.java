@@ -74,7 +74,7 @@ public class AlojamientoDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO A JOIN RESERVA r "
-        + "WHERE A.MAXHUESPED >= ? AND A.ACEPTACIONRESERVA=FALSE OR R.FECHAENTRADA>? AND FECHASALIDA<?;";
+        + "WHERE A.MAXHUESPED >= ? AND A.ACEPTACIONRESERVA=FALSE OR R.FECHAENTRADA>? AND FECHASALIDA<? AND A.LOCALIDAD=?;";
         
         try {
             HashMap<Imagen,Alojamiento> lista= new HashMap<> () ;
@@ -82,6 +82,7 @@ public class AlojamientoDB {
             ps.setInt(1, num);
             ps.setDate(2, (java.sql.Date) d1);
             ps.setDate(3, (java.sql.Date) d2);
+            ps.setString(4, prov);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Imagen img = new Imagen();

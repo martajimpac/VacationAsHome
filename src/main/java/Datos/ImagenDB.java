@@ -35,15 +35,17 @@ public class ImagenDB {
       
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, alojamientos.ubicacionPrecisa);
-            rs = ps.executeQuery();
-            while (rs.next()) {
+            for(int i=0;i<alojamientos.size();i++){
+                ps.setString(1, alojamientos.get(i).getUbicacionPrecisaGPS());
+                rs = ps.executeQuery();
+                while (rs.next()) {
                 im = new Imagen();
                 im.setEtiqueta(rs.getString("i.etiqueta"));
-                im.setImagen(rs.getBLOB("i.imagen"));
-                
+                im.setImagen(rs.getBlob("i.imagen"));
                 imagenes.add(im);
+                }
             }
+ 
             //cerramos
             rs.close();
             ps.close();
