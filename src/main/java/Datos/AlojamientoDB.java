@@ -5,6 +5,7 @@
 package Datos;
 import Modelo.Alojamiento;
 import Modelo.CoordenadasGPS;
+import Modelo.Localidad;
 import Modelo.TipoServicio;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +51,7 @@ public class AlojamientoDB {
                 aloj.setUbicacionDescrita(rs.getString("a.ubicacionDescrita"));
                 aloj.setCaracteristicas(rs.getString("a.caracteriticas"));
                 aloj.setServicio((TipoServicio) rs.getObject("a.servicio"));
-                aloj.setLocalidad(rs.getString("a.localidad"));
+                aloj.setLocalidad((Localidad) rs.getObject("a.localidad"));
                 aloj.setValoracionGlobal(rs.getInt("a.valoracionGlobal"));
                 aloj.setAnfitrion_email(rs.getString("a.anfitrionEmail"));
                 alojamientos.add(aloj);
@@ -94,7 +95,7 @@ public class AlojamientoDB {
                 alj.setUbicacionDescrita(rs.getString("UBICACIONDESCRITA"));
                 alj.setCaracteristicas(rs.getString("CARACTERISTICAS"));
                 alj.setServicio((TipoServicio) rs.getObject("SERVICIO"));
-                alj.setLocalidad(rs.getString("LOCALIDAD"));
+                alj.setLocalidad((Localidad) rs.getObject("LOCALIDAD"));
                 alj.setValoracionGlobal(rs.getInt("VALORACIONGLOBAL"));
                 alj.setAnfitrion_email(rs.getString("ANFITRION_EMAIL"));
                 lista.add(alj);

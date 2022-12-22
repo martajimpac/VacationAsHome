@@ -70,7 +70,7 @@ public class Alojamiento {
         this.aceptacionReserva = acepracionReserva;
     }
 
-    public void setLocalidad(String Localidad) {
+    public void setLocalidad(Localidad Localidad) {
         this.Localidad = Localidad;
     }
 
@@ -126,7 +126,7 @@ public class Alojamiento {
         return this.aceptacionReserva;
     }
 
-    public String getLocalidad() {
+    public Localidad getLocalidad() {
         return this.Localidad;
     }
 
