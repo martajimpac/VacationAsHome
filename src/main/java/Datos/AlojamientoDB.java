@@ -5,6 +5,7 @@
 package Datos;
 import Modelo.Alojamiento;
 import Modelo.CoordenadasGPS;
+import Modelo.Imagen;
 import Modelo.Localidad;
 import Modelo.TipoServicio;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 
 /**
  *
@@ -36,24 +38,24 @@ public class AlojamientoDB {
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, provincia);
-            ps.setString(1, municipio);
-            ps.setInt(1, numHuespedes);
+            ps.setString(2, municipio);
+            ps.setInt(3, numHuespedes);
             rs = ps.executeQuery();
             while (rs.next()) {
                 aloj = new Alojamiento();
-                aloj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("a.ubicacionPrecisa"));
-                aloj.setFechaEntrada(rs.getDate("a.fechaEntrada"));
-                aloj.setNombre(rs.getString("a.nombre"));
-                aloj.setMaxHuespedes(rs.getInt("a.maxHuesped"));
-                aloj.setNumDormitorios(rs.getInt("a.numDormitorios"));
-                aloj.setNumCamas(rs.getInt("a.numCamas"));
-                aloj.setNumBaños(rs.getInt("a.numBaños"));
-                aloj.setUbicacionDescrita(rs.getString("a.ubicacionDescrita"));
-                aloj.setCaracteristicas(rs.getString("a.caracteriticas"));
-                aloj.setServicio((TipoServicio) rs.getObject("a.servicio"));
-                aloj.setLocalidad((Localidad) rs.getObject("a.localidad"));
-                aloj.setValoracionGlobal(rs.getInt("a.valoracionGlobal"));
-                aloj.setAnfitrion_email(rs.getString("a.anfitrionEmail"));
+                aloj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("ubicacionPrecisa"));
+                aloj.setFechaEntrada(rs.getDate("fechaEntrada"));
+                aloj.setNombre(rs.getString("nombre"));
+                aloj.setMaxHuespedes(rs.getInt("maxHuesped"));
+                aloj.setNumDormitorios(rs.getInt("numDormitorios"));
+                aloj.setNumCamas(rs.getInt("numCamas"));
+                aloj.setNumBaños(rs.getInt("numBaños"));
+                aloj.setUbicacionDescrita(rs.getString("ubicacionDescrita"));
+                aloj.setCaracteristicas(rs.getString("caracteriticas"));
+                aloj.setServicio((TipoServicio) rs.getObject("servicio"));
+                aloj.setLocalidad((Localidad) rs.getObject("localidad"));
+                aloj.setValoracionGlobal(rs.getInt("valoracionGlobal"));
+                aloj.setAnfitrion_email(rs.getString("anfitrionEmail"));
                 alojamientos.add(aloj);
             }
             //de aqui tengo que sacar los alojamientos pero no se como
@@ -68,22 +70,26 @@ public class AlojamientoDB {
     }
     
     //FALTA COMPROBAR QUE ESTEN EN LA LOCALIDAD INDICADA, creo que falta la R en fecha salida
-     public static ArrayList <Alojamiento> consulta(String prov, String muni,Date d1,Date d2,int num) {
+     public static HashMap<Imagen,Alojamiento> consulta(String prov, String muni,Date d1,Date d2,int num) {
         Conexion pool = Conexion.getInstance(); 
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM ALOJAMIENTO A JOIN RESERVA r "
+        String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO A JOIN RESERVA r "
         + "WHERE A.MAXHUESPED >= ? AND A.ACEPTACIONRESERVA=FALSE OR R.FECHAENTRADA>? AND FECHASALIDA<?;";
         
         try {
-             ArrayList<Alojamiento>lista= new ArrayList<Alojamiento>() ;
+            HashMap<Imagen,Alojamiento> lista= new HashMap<> () ;
             ps = connection.prepareStatement(query);
             ps.setInt(1, num);
             ps.setDate(2, (java.sql.Date) d1);
             ps.setDate(3, (java.sql.Date) d2);
             rs = ps.executeQuery();
             while (rs.next()) {
+                Imagen img = new Imagen();
+                img.setImagen(rs.getBlob("IMAGEN"));
+                img.setEtiqueta(rs.getString("ETIQUETA"));
+                img.setAlojamiento_ubicacionPrecisa((CoordenadasGPS) rs.getObject("ALOJAMIENTO_UBICACIONPRECISA"));
                 Alojamiento alj = new Alojamiento();
                 alj.setUbicacionPrecisaGPS((CoordenadasGPS) rs.getObject("UBICACIONPRECISA"));
                 alj.setFechaEntrada(rs.getDate("FECHAENTRADA"));
@@ -98,7 +104,7 @@ public class AlojamientoDB {
                 alj.setLocalidad((Localidad) rs.getObject("LOCALIDAD"));
                 alj.setValoracionGlobal(rs.getInt("VALORACIONGLOBAL"));
                 alj.setAnfitrion_email(rs.getString("ANFITRION_EMAIL"));
-                lista.add(alj);
+                lista.put(img,alj);
             }
             rs.close();
             ps.close();

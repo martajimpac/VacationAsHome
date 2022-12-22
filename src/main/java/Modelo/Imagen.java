@@ -4,7 +4,7 @@
  */
 package Modelo;
 
-import java.io.File;
+import java.sql.Blob;
 
 /**
  *
@@ -12,19 +12,19 @@ import java.io.File;
  */
 public class Imagen {
    private String etiqueta = "";
-   private File imagen;
-   private String alojamiento_ubicacionPrecisa = "";
+   private Blob imagen;
+   private CoordenadasGPS alojamiento_ubicacionPrecisa = null;
    private String alojamiento_anfitrion_email = "";
 
     public void setEtiqueta(String etiqueta) {
         this.etiqueta = etiqueta;
     }
 
-    public void setImagen(File imagen) {
+    public void setImagen(Blob imagen) {
         this.imagen = imagen;
     }
 
-    public void setAlojamiento_ubicacionPrecisa(String alojamiento_ubicacionPrecisa) {
+    public void setAlojamiento_ubicacionPrecisa(CoordenadasGPS alojamiento_ubicacionPrecisa) {
         this.alojamiento_ubicacionPrecisa = alojamiento_ubicacionPrecisa;
     }
 
@@ -36,11 +36,11 @@ public class Imagen {
         return this.etiqueta;
     }
 
-    public File getImagen() {
+    public Blob getImagen() {
         return this.imagen;
     }
 
-    public String getAlojamiento_ubicacionPrecisa() {
+    public CoordenadasGPS getAlojamiento_ubicacionPrecisa() {
         return this.alojamiento_ubicacionPrecisa;
     }
 

@@ -6,11 +6,12 @@
 package Controlador;
 
 import Modelo.Alojamiento;
+import Modelo.Imagen;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +48,7 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
         String date2 = "";
         int numPersonas = 0;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        ArrayList <Alojamiento> Aloj= new ArrayList <>();
+        HashMap<Imagen,Alojamiento> Aloj= new HashMap<>();
         try{
             /* TODO output your page here. You may use following sample code. */
             provincia=request.getParameter("inputAddress1");

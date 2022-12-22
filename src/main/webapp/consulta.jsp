@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 18 dic. 2022, 15:44:36
-    Author     : franc
+    Author     : paula, Francisco
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -80,6 +80,7 @@
                 <div class="mask galleryBoost" style="touch-action: pan-y; user-select: none; transition-duration: 0s; transform: translateX(0px);">
                 <div class="placeholder" style="transform: translateX(-300px);"></div>
                 <div class="placeholder" style="transform: translateX(0px);">
+                    <img src=<%= r%> style="visibility: visible;" alt="" width="300" height="225">
                 </div>
                 <div class="placeholder" style="transform: translateX(300px);"><img src="https://img3.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/6c/57/47/846614101.jpg" style="visibility: visible;" alt="" width="300" height="225"></div>
                 </div>
