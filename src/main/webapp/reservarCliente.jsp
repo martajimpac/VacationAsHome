@@ -63,6 +63,62 @@
           </div>
         </div>
       </nav>
+        
+        <section class="mt-7 py-0">
+        <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/hero-section-1.png);">
+        </div>
+        <!--/.bg-holder-->
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 py-5 py-xl-5 py-xxl-7">
+              <h1 class="display-3 text-1000 fw-normal">Let’s make a tour</h1>
+              <h1 class="display-3 text-primary fw-bold">Discover the beauty</h1>
+              <div class="pt-5">
+                   <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <!-- MODIFICACION===============================================-->
+                        <form class="row g-4 mt-5" method="post" action="ReservaServlet">
+                        <!-- Para diferenciar entre diferentes formularios===============================================-->
+                        <input type="hidden" id="method" name="method" value="1">  
+                        <div class="col-sm-6 col-md-6 col-xl-5">
+                          <div class="input-group-icon">
+                            <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-xl-5">
+                          <div class="input-group-icon">
+                            <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
+                          </div>
+                        </div>                 
+                        <div class="col-sm-6 col-md-6 col-xl-5">
+                          <div class="input-group-icon">
+                            <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
+                            <select class="form-select form-voyage-select input-box" id="inputPersonOne">
+                              <option selected="selected">1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              
+                            </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
+                          </div>
+                        </div>
+                        <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
+                            <button class="btn btn-secondary" type="submit">Reservar Alojamientos</button>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+        
+        
   <form action="ReservaServlet" method="post" name="formulation">
             <% ArrayList<Alojamiento> dataList= (ArrayList<Alojamiento>)request.getAttribute("alojamientos");
                         if(dataList!=null){
@@ -120,6 +176,7 @@
                 </div>
                 </div>
             </article>
+
          <%}
         }else{
 %>
