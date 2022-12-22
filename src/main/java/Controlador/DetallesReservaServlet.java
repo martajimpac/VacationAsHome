@@ -1,0 +1,137 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package Controlador;
+
+import java.util.ArrayList;
+import Modelo.Alojamiento;
+import Modelo.Imagen;
+import Datos.AlojamientoDB;
+import Datos.ImagenDB;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @authors marta oscar
+ */
+@WebServlet(name = "DetallesReservaServlet", urlPatterns = {"/DetallesReservaServlet"})
+public class DetallesReservaServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        //variables que vamos a usar
+      //No se como manda la vista la selección del alojamiento, y si siquiera es necesario un controlador para ese paso. QUEDA PAUSADO
+        Alojamiento alojamientoSeleccionado = new Alojamiento;
+        String nombreAlojamiento = "";
+       
+        try (PrintWriter out = response.getWriter()) {
+            
+            String nombreAlojamiento = request.getParameter("nombreAlojamiento");
+            
+            //Comprobar que los campos no estén vacíos
+            if(!"".equals(nombreAlojamiento)){
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "You must select an apartment");
+            }
+            
+             
+            //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
+            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
+            
+          
+            if(alojamientos==null){
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
+            }
+
+            for(i in alojamientos){
+                //Conseguir la lista de imagenes de los alojamientos
+                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
+            }
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
+            
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
+
+            //mandar lista de alojamientos*/
+            request.setAttribute("alojamientos", alojamientos);
+            //mandar lista de imagenes*/
+            request.setAttribute("imagenes", imagenes);
+           
+            
+            dispatcher.forward(request, response);
+            
+        } catch (IOException | ServletException e) {
+            System.out.println(e);
+        }
+        
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
