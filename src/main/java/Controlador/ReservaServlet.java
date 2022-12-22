@@ -64,10 +64,10 @@ public class ReservaServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
             }
 
-            for(i in alojamientos){
-                //Conseguir la lista de imagenes de los alojamientos
-                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
-            }
+            
+            //Conseguir la lista de imagenes de los alojamientos
+            imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
+            
             
         }catch(Exception e){
             System.out.println(e);
