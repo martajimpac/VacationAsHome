@@ -74,7 +74,7 @@
               <div class="pt-5">
                    <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <form class="row g-4 mt-5" action="ConsultarAlojamientosClienteServlet">
+                      <form class="row g-4 mt-5" action="ConsultarAlojamientosClienteServlet" metod="post">
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>

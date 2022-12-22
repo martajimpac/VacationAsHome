@@ -4,7 +4,7 @@
     Author     : paula, Francisco
 --%>
 
-<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Imagen"%>
 <%@page import="Modelo.Alojamiento"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -64,18 +64,14 @@
           </div>
         </div>
       </nav>
-    <form action="AdminServlet" method="post" name="formulation">
-            <% HashMap<Imagen,Alojamiento>  dataList= (HashMap<Imagen,Alojamiento> )request.getAttribute("Aloj");
+    <form action="ConsultarAlojamientosClienteServlet" method="post" name="formulation">
+            <% ArrayList<Alojamiento>  dataList= (ArrayList<Alojamiento>)request.getAttribute("Aloj");
+               ArrayList<Imagen>   im= (ArrayList<Imagen> )request.getAttribute("img");
                         if(dataList!=null){
                             for(int i=0; i<dataList.size(); i++){
                                 Alojamiento r = dataList.get(i);
-                                Imagen key = null;
-                                for (Imagen k : dataList.keySet()) {
-                                  if (dataList.get(k).getUbicacionPrecisaGPS() == r.getUbicacionPrecisaGPS()) {
-                                    key = k;
-                                    break;
-                                  }
-                                }
+                                Imagen ig=im.get(i);
+                                
                         %>
              <article class="item item-multimedia-container" data-adid="92726554">
                 <picture class="item-multimedia ">
@@ -88,7 +84,7 @@
                 <div class="mask galleryBoost" style="touch-action: pan-y; user-select: none; transition-duration: 0s; transform: translateX(0px);">
                 <div class="placeholder" style="transform: translateX(-300px);"></div>
                 <div class="placeholder" style="transform: translateX(0px);">
-                    <img src=<%= key.getImagen() %> style="visibility: visible;" alt="" width="300" height="225">
+                    <img src=<%= ig.getImagen() %> style="visibility: visible;" alt="" width="300" height="225">
                 </div>
                 <div class="placeholder" style="transform: translateX(300px);"><img src="https://img3.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/6c/57/47/846614101.jpg" style="visibility: visible;" alt="" width="300" height="225"></div>
                 </div>

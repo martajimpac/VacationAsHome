@@ -5,13 +5,11 @@
  */
 package Controlador;
 
-import Modelo.Alojamiento;
-import Modelo.Imagen;
+
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,8 +37,6 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
         // variables que vamos a utilizar
         String provincia = "";
         String municipio= "";
@@ -48,7 +44,8 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
         String date2 = "";
         int numPersonas = 0;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        HashMap<Imagen,Alojamiento> Aloj= new HashMap<>();
+        ArrayList Aloj= new  ArrayList<> ();
+        ArrayList img = new  ArrayList<> ();
         try{
             /* TODO output your page here. You may use following sample code. */
             provincia=request.getParameter("inputAddress1");
@@ -58,8 +55,8 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
             date2 = request.getParameter("inputDateTwo");
             Date d2 = dateFormat.parse(date2);
             numPersonas = Integer.parseInt(request.getParameter("inputPersonOne"));
-
             Aloj=Datos.AlojamientoDB.consulta(provincia,municipio,d1,d2,numPersonas);
+            img=Datos.ImagenDB.buscarImagenesAlojamientos(Aloj);
         }catch(Exception e){
             System.out.println(e);
         }
@@ -69,6 +66,7 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
         try {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/consulta.jsp");
             request.setAttribute("Aloj", Aloj);
+            request.setAttribute("img", img);
             // save in the session the email of the user and 
             // is save in the request object
             dispatcher.forward(request, response);

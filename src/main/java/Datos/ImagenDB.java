@@ -26,8 +26,7 @@ public class ImagenDB {
         ResultSet rs = null;
         //buscar imagenes de los alojamientos de la lista
       
-        String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO a ON i.Alojamiento_ubicacionPrecisa = a.ubicacionPrecisa"
-          + "WHERE a.ubicacionPrecisa = ?";
+        String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO a WHERE i.`Alojamiento_ubicacionPrecisa` = a.`ubicacionPrecisa`AND i.`Alojamiento_ubicacionPrecisa` LIKE ?;";
         
         //Crear las variables
         ArrayList <Imagen> imagenes = new ArrayList();
@@ -40,12 +39,11 @@ public class ImagenDB {
                 rs = ps.executeQuery();
                 while (rs.next()) {
                 im = new Imagen();
-                im.setEtiqueta(rs.getString("i.etiqueta"));
-                im.setImagen(rs.getBlob("i.imagen"));
+                im.setEtiqueta(rs.getString("etiqueta"));
+                im.setImagen(rs.getBlob("imagen"));
                 imagenes.add(im);
                 }
             }
- 
             //cerramos
             rs.close();
             ps.close();
