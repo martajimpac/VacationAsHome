@@ -121,10 +121,13 @@
         
   <form action="ReservaServlet" method="post" name="formulation">
             <% ArrayList<Alojamiento> dataList= (ArrayList<Alojamiento>)request.getAttribute("alojamientos");
+                ArrayList<Imagen> imgList= (ArrayList<Imagen>)request.getAttribute("imagenes");
                         if(dataList!=null){
                             for(int i=0; i<dataList.size(); i++){
                                 Alojamiento r = dataList.get(i);
+                                Imagen img = imgList.get(i);
                         %>
+      <!-- No se en que parte del codigo hay que introducir la imagen-->
              <article class="item item-multimedia-container" data-adid="92726554">
                 <picture class="item-multimedia ">
                 <div class="item-ribbon-container">
