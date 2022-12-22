@@ -4,9 +4,7 @@
  */
 package Datos;
 import Modelo.Alojamiento;
-import Modelo.GPS;
 import Modelo.Imagen;
-import Modelo.Localidad;
 import Modelo.TipoServicio;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,7 +41,7 @@ public class AlojamientoDB {
             rs = ps.executeQuery();
             while (rs.next()) {
                 aloj = new Alojamiento();
-                aloj.setUbicacionPrecisaGPS((GPS) rs.getObject("ubicacionPrecisa"));
+                aloj.setUbicacionPrecisaGPS(rs.getString("ubicacionPrecisa"));
                 aloj.setFechaEntrada(rs.getDate("fechaEntrada"));
                 aloj.setNombre(rs.getString("nombre"));
                 aloj.setMaxHuespedes(rs.getInt("maxHuesped"));
@@ -53,7 +51,7 @@ public class AlojamientoDB {
                 aloj.setUbicacionDescrita(rs.getString("ubicacionDescrita"));
                 aloj.setCaracteristicas(rs.getString("caracteriticas"));
                 aloj.setServicio((TipoServicio) rs.getObject("servicio"));
-                aloj.setLocalidad((Localidad) rs.getObject("localidad"));
+                aloj.setLocalidad(rs.getString("localidad"));
                 aloj.setValoracionGlobal(rs.getInt("valoracionGlobal"));
                 aloj.setAnfitrion_email(rs.getString("anfitrionEmail"));
                 alojamientos.add(aloj);
@@ -89,9 +87,9 @@ public class AlojamientoDB {
                 Imagen img = new Imagen();
                 img.setImagen(rs.getBlob("IMAGEN"));
                 img.setEtiqueta(rs.getString("ETIQUETA"));
-                img.setAlojamiento_ubicacionPrecisa((GPS) rs.getObject("ALOJAMIENTO_UBICACIONPRECISA"));
+                img.setAlojamiento_ubicacionPrecisa( rs.getString("ALOJAMIENTO_UBICACIONPRECISA"));
                 Alojamiento alj = new Alojamiento();
-                alj.setUbicacionPrecisaGPS((GPS) rs.getObject("UBICACIONPRECISA"));
+                alj.setUbicacionPrecisaGPS( rs.getString("UBICACIONPRECISA"));
                 alj.setFechaEntrada(rs.getDate("FECHAENTRADA"));
                 alj.setNombre(rs.getString("NOMBRE"));
                 alj.setMaxHuespedes(rs.getInt("MAXHUESPED"));
@@ -101,7 +99,7 @@ public class AlojamientoDB {
                 alj.setUbicacionDescrita(rs.getString("UBICACIONDESCRITA"));
                 alj.setCaracteristicas(rs.getString("CARACTERISTICAS"));
                 alj.setServicio((TipoServicio) rs.getObject("SERVICIO"));
-                alj.setLocalidad((Localidad) rs.getObject("LOCALIDAD"));
+                alj.setLocalidad(rs.getString("LOCALIDAD"));
                 alj.setValoracionGlobal(rs.getInt("VALORACIONGLOBAL"));
                 alj.setAnfitrion_email(rs.getString("ANFITRION_EMAIL"));
                 lista.put(img,alj);

@@ -10,23 +10,23 @@ import java.util.Date;
  * @author marta
  */
 public class Precio {
-    private Moneda precioNoche = new Moneda();
-    private Moneda precioFinDeSemana = new Moneda();
-    private Moneda precioMes = new Moneda();
+    private float precioNoche =0;
+    private float precioFinDeSemana = 0;
+    private float precioMes = 0;
     private Date fechaIncio  = new Date();
     private Date fechaFin  = new Date();
-    private GPS alojamiento_ubicacion_precisa = null;
+    private String alojamiento_ubicacion_precisa = null;
     private String alojamiento_anfitrion_email = "";
 
-    public void setPrecioNoche(Moneda precioNoche) {
+    public void setPrecioNoche(float precioNoche) {
         this.precioNoche = precioNoche;
     }
 
-    public void setPrecioFinDeSemana(Moneda precioFinDeSemana) {
+    public void setPrecioFinDeSemana(float precioFinDeSemana) {
         this.precioFinDeSemana = precioFinDeSemana;
     }
 
-    public void setPrecioMes(Moneda precioMes) {
+    public void setPrecioMes(float precioMes) {
         this.precioMes = precioMes;
     }
 
@@ -38,7 +38,7 @@ public class Precio {
         this.fechaFin = fechaFin;
     }
 
-    public void setAlojamiento_ubicacion_precisa(GPS alojamiento_ubicacion_precisa) {
+    public void setAlojamiento_ubicacion_precisa(String alojamiento_ubicacion_precisa) {
         this.alojamiento_ubicacion_precisa = alojamiento_ubicacion_precisa;
     }
 
@@ -46,15 +46,15 @@ public class Precio {
         this.alojamiento_anfitrion_email = alojamiento_anfitrion_email;
     }
     
-        public Moneda getPrecioNoche() {
+        public float getPrecioNoche() {
         return this.precioNoche;
     }
 
-    public Moneda getPrecioFinDeSemana() {
+    public float getPrecioFinDeSemana() {
         return this.precioFinDeSemana;
     }
 
-    public Moneda getPrecioMes() {
+    public float getPrecioMes() {
         return this.precioMes;
     }
 
@@ -66,7 +66,7 @@ public class Precio {
         return this.fechaFin;
     }
 
-    public GPS getAlojamiento_ubicacion_precisa() {
+    public String getAlojamiento_ubicacion_precisa() {
         return this.alojamiento_ubicacion_precisa;
     }
 
