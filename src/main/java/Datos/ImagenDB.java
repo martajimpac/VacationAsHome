@@ -26,7 +26,8 @@ public class ImagenDB {
         ResultSet rs = null;
         //buscar imagenes de los alojamientos de la lista
       
-        String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO a ON i.Anfitrion_email = a.Anfitrion_email";
+        String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO a ON i.Alojamiento_ubicacionPrecisa = a.ubicacionPrecisa"
+          + "WHERE a.ubicacionPrecisa = ?";
         
         //Crear las variables
         ArrayList <Imagen> imagenes = new ArrayList();
@@ -34,9 +35,7 @@ public class ImagenDB {
       
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, provincia);
-            ps.setString(1, municipio);
-            ps.setInt(1, numHuespedes);
+            ps.setString(1, alojamientos.ubicacionPrecisa);
             rs = ps.executeQuery();
             while (rs.next()) {
                 im = new Imagen();
@@ -56,9 +55,3 @@ public class ImagenDB {
         }
     }
 }
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
