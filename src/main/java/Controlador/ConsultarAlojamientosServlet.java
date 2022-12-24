@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author franc
  */
-@WebServlet(name = "ConsultarAlojamientosClienteServlet", urlPatterns = {"/ConsultarAlojamientosClienteServlet"})
-public class ConsultarAlojamientosClienteServlet extends HttpServlet {
+@WebServlet(name = "ConsultarAlojamientosServlet", urlPatterns = {"/ConsultarAlojamientosServlet"})
+public class ConsultarAlojamientosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +35,6 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
         // variables que vamos a utilizar
         String provincia = "";
@@ -64,7 +63,7 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
         
         // una vez se pulse el boton, se captura su evento y se recraga la misma pagina
         try {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/consulta.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             request.setAttribute("Aloj", Aloj);
             request.setAttribute("img", img);
             // save in the session the email of the user and 
@@ -74,6 +73,7 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
             System.out.println(e);
         }
         }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -112,4 +112,5 @@ public class ConsultarAlojamientosClienteServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
    }

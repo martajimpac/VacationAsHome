@@ -20,7 +20,7 @@ public class Alojamiento {
     private int numBaños = 0;
     private String ubicacionDescrita = "";
     private String caracteristicas = "";
-    private TipoServicio servicio;
+    private String servicio;
     private boolean aceptacionReserva = false;
     private String Localidad = ""; 
     private int valoracionGlobal = 0;
@@ -62,7 +62,7 @@ public class Alojamiento {
         this.caracteristicas = caracteristicas;
     }
 
-    public void setServicio(TipoServicio servicio) {
+    public void setServicio(String servicio) {
         this.servicio = servicio;
     }
 
@@ -118,7 +118,7 @@ public class Alojamiento {
         return this.caracteristicas;
     }
 
-    public TipoServicio getServicio() {
+    public String getServicio() {
         return this.servicio;
     }
 

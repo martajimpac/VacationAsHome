@@ -8,7 +8,6 @@ package Datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Calendar;
 
 /**
  *
@@ -61,28 +60,6 @@ public class ClienteDB {
             return res;
         } catch (Exception e) {
             return false;
-        }
-    }
-    
-     // comprobamos si el email ha sido registrado anteriormente en la base de datos
-    public static int singInClient(String emailAddress,String password) {
-        Conexion pool = Conexion.getInstance();
-        Connection connection = pool.getConnection();
-        PreparedStatement ps = null;
-        String query = "INSERT INTO CLIENTE (EMAIL,FECHASUSCRIPCION, PASSWORD) VALUES (?,?, ?)";
-        
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setString(1, emailAddress);
-            ps.setDate(2, (java.sql.Date)Calendar.getInstance().getTime());
-            ps.setString(3, password);
-            int res = ps.executeUpdate();
-            ps.close();
-            pool.freeConnection(connection);
-            return res;
-        } catch (Exception e) {
-            System.out.println("error22  " +e);
-            return 0;
         }
     }
 }

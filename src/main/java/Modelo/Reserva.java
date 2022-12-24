@@ -16,7 +16,7 @@ public class Reserva {
     private Date fechaSalida = new Date();
     private int numHuespedes = 0;
     private String comentarios = "";
-    private EstadoReserva estado;
+    private String estado;
     private boolean dividePago = false;
     private String usuarioRegistrado_email = "";
     private String alojamiento_ubicacion_precisa = ""; //TODO
@@ -42,7 +42,7 @@ public class Reserva {
         this.comentarios = comentarios;
     }
 
-    public void setEstado(EstadoReserva estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -82,7 +82,7 @@ public class Reserva {
         return this.comentarios;
     }
 
-    public EstadoReserva getEstado() {
+    public String getEstado() {
         return this.estado;
     }
 

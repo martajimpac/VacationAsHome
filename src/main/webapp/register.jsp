@@ -58,14 +58,14 @@
         </div>
       </nav>
       <section class="mt-7 py-0">
-        <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/hero-section-1.png);">
+        <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/dhigu.png);">
         </div>
         <!--/.bg-holder-->
 
         <div class="container">
           <div class="row">
             <div class="col-lg-6 py-5 py-xl-5 py-xxl-7">
-              <h1 class="display-3 text-1000 fw-normal">Let’s make a tour</h1>
+              <h1 class="display-3 text-1000 fw-normal">Enter and continue exploring</h1>
               <h1 class="display-3 text-primary fw-bold">Discover the beauty</h1>
               <div class="pt-5">
                 <nav>
@@ -112,7 +112,7 @@
       <section class="py-0 overflow-hidden">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 px-0"><img class="img-fluid order-md-0 mb-4 h-100 fit-cover" src="assets/img/gallery/hero-section-2.png" alt="..." /></div>
+            <div class="col-lg-6 px-0"><img class="img-fluid order-md-0 mb-4 h-100 fit-cover" src="assets/img/gallery/12.jpg" alt="..." /></div>
             <div class="col-lg-6 px-0 bg-primary-gradient bg-offcanvas-right">
               <div class="mx-6 mx-xl-8 my-8">
                 <div class="align-items-center d-block d-flex mb-5"><img class="img-fluid me-3 me-md-2 me-lg-4" src="assets/img/icons/locations.png" alt="..." />
@@ -122,12 +122,12 @@
                 </div>
                 <div class="align-items-center d-block d-flex mb-5"><img class="img-fluid me-3 me-md-2 me-lg-4" src="assets/img/icons/schedule.png" alt="..." />
                   <div class="flex-1 align-items-center pt-2">
-                    <h5 class="fw-bold text-light">Make your own plans.</h5>
+                    <h5 class="fw-bold text-light">Give yourself some time to explore new places</h5>
                   </div>
                 </div>
                 <div class="align-items-center d-block d-flex mb-5"><img class="img-fluid me-3 me-md-2 me-lg-4" src="assets/img/icons/save.png" alt="..." />
                   <div class="flex-1 align-items-center pt-2">
-                    <h5 class="fw-bold text-light">Save 50% on your next trip</h5>
+                    <h5 class="fw-bold text-light">Book spectacular accommodations</h5>
                   </div>
                 </div>
               </div>

@@ -6,7 +6,6 @@ package Datos;
 import Modelo.Alojamiento;
 import Modelo.Imagen;
 import java.util.ArrayList;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
