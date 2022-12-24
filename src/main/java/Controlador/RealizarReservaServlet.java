@@ -6,9 +6,11 @@ package Controlador;
 
 import java.util.ArrayList;
 import Modelo.Alojamiento;
-//import Modelo.Mensaje;
+import Modelo.Imagen;
 import Datos.AlojamientoDB;
-//import Datos.MensajeDB;
+import Datos.ImagenDB;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -41,34 +43,31 @@ public class RealizarReservaServlet extends HttpServlet {
         //variables que vamos a usar
         ArrayList<Alojamiento> alojamientos = new ArrayList();
         ArrayList<Imagen> imagenes = new ArrayList();
-      //DE AQUI PARA ABAJO NO ESTA HECHO
-       
-        try (PrintWriter out = response.getWriter()) {
-            
-            String provincia = request.getParameter("inputAddress1");
-            String municipio = request.getParameter("inputAddress2");
-            //he quitado la fecha porque se introduce despues en el caso de uso
-           
-            int numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
-            
-            //Comprobar que los campos no estén vacíos
-            if(!"".equals(provincia) || !"".equals(municipio)){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "The address cannot be empty");
-            }
-            
-             
-            //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
-            
-          
-            if(alojamientos==null){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
-            }
+        Alojamiento alojamiento = new Alojamiento();
+        String provincia = "";
+        String municipio = "";
+        String fechaEnt = "";
+        String fechaSal = "";
+        String texto = "";
+        int indiceAloj = 0;
+        int numHuespedes = 0;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-            for(i in alojamientos){
-                //Conseguir la lista de imagenes de los alojamientos
-                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
-            }
+        try {        
+            provincia = request.getParameter("inputAddress1");
+            municipio = request.getParameter("inputAddress2");
+            numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
+            fechaEnt = request.getParameter("inputDateOne");
+            fechaSal = request.getParameter("inputDateTwo");
+            indiceAloj = Integer.parseInt(request.getParameter("inputAlojamiento"));
+            //Pasar las fechas a tipo date
+            Date fechaEntrada = dateFormat.parse(fechaEnt);
+            Date fechaSalida = dateFormat.parse(fechaSal);
+            
+            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,numHuespedes);
+            alojamiento = alojamientos.get(indiceAloj);
+           
+            //Comprobar que el alojamiento este disponible en las fechas introducidas y que no tenga una reserva
             
         }catch(Exception e){
             System.out.println(e);
@@ -76,14 +75,9 @@ public class RealizarReservaServlet extends HttpServlet {
         
         try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
-
-            //mandar lista de alojamientos*/
-            request.setAttribute("alojamientos", alojamientos);
-            //mandar lista de imagenes*/
-            request.setAttribute("imagenes", imagenes);
-           
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente2.jsp");
             
+            request.setAttribute("texto", texto);
             dispatcher.forward(request, response);
             
         } catch (IOException | ServletException e) {

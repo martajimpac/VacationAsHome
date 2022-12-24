@@ -1,15 +1,12 @@
 <%-- 
-    Document   : reservarCliente
+    Document   : index
     Created on : 18 dic. 2022, 15:44:36
     Author     : franc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.ArrayList" %>
-<%@page import="Modelo.Alojamiento" %>
-<%@page import="Modelo.Imagen" %>
-<%@page import="Datos.AlojamientoDB" %>
-<%@page import="Datos.ImagenDB" %>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Modelo.Alojamiento"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -44,9 +41,11 @@
 
 
   <body>
+
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
+    
     <main class="main" id="top">
       <nav class="navbar navbar-expand-lg navbar-light py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container"><a class="navbar-brand" href="index.jsp"><img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /><span class="fw-bold text-primary ms-2">VacationAsHome</span></a>
@@ -60,13 +59,12 @@
             </ul>
             <form>
               <a class="nav-item px-2"></a>
-              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Sign in</span></a>
+              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Login</span></a>
             </form>
           </div>
         </div>
       </nav>
-        
-        <section class="mt-7 py-0">
+      <section class="mt-7 py-0">
         <div class="bg-holder w-50 bg-right d-none d-lg-block" style="background-image:url(assets/img/gallery/hero-section-1.png);">
         </div>
         <!--/.bg-holder-->
@@ -79,39 +77,39 @@
               <div class="pt-5">
                    <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <!-- MODIFICACION===============================================-->
-                        <form class="row g-4 mt-5" method="post" action="ReservaServlet">
-                        <!-- Para diferenciar entre diferentes formularios===============================================-->
-                        <input type="hidden" id="method" name="method" value="1">  
+                      <form class="row g-4 mt-5" method = "post" action="ReservaServlet">             
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputAddress1">Provincia</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress1" name="inputAddress1" type="text" placeholder="Provincia" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"></i></span>
                           </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputAddress2">Municipio</label>
-                            <input class="form-control input-box form-voyage-control" id="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
+                            <input class="form-control input-box form-voyage-control" id="inputAddress2" name="inputAddress2" type="text" placeholder="Municipio" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-map-marker-alt"> </i></span>
                           </div>
-                        </div>                 
+                        </div>
+                       
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label class="form-label visually-hidden" for="inputPersonOne">Person</label>
-                            <select class="form-select form-voyage-select input-box" id="inputPersonOne">
-                              <option selected="selected">1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <select class="form-select form-voyage-select input-box" id="inputPersonOne" name="inputPersonOne">
+                               <option selected="selected" value="2">2 Adults</option>
+                              <option value="3">2 Adults 1 children</option>
+                              <option value="4">2 Adults 2 children</option>
                               
                             </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
-                          </div>
+                          </div>           
                         </div>
+                        <% String texto = (String)request.getAttribute("texto"); 
+                             if(texto!=null){%>
+                             <p class="text-800 fw-bold text-decoration-none" ><%= texto%></p>
+                          <% } %>
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
                             <button class="btn btn-secondary" type="submit">Reservar Alojamientos</button>
-                        </div>
-                      </form>
+                        </div>     
+                        </form>
                     </div>
                 </div>
               </div>
@@ -119,82 +117,43 @@
           </div>
         </div>
       </section>
-        
-        
-  <form action="ReservaServlet" method="post" name="formulation">
-            <% ArrayList<Alojamiento> dataList= (ArrayList<Alojamiento>)request.getAttribute("alojamientos");
-                ArrayList<Imagen> imgList= (ArrayList<Imagen>)request.getAttribute("imagenes");
-                        if(dataList!=null){
-                            for(int i=0; i<dataList.size(); i++){
-                                Alojamiento r = dataList.get(i);
-                                Imagen img = imgList.get(i);
-                        %>
-      <!-- No se en que parte del codigo hay que introducir la imagen-->
-             <article class="item item-multimedia-container" data-adid="92726554">
-                <picture class="item-multimedia ">
-                <div class="item-ribbon-container">
+       
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+      <section class="py-0 overflow-hidden">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6 px-0"><img class="img-fluid order-md-0 mb-4 h-100 fit-cover" src="assets/img/gallery/hero-section-2.png" alt="..." /></div>
+            <div class="col-lg-6 px-0 bg-primary-gradient bg-offcanvas-right">
+              <div class="mx-6 mx-xl-8 my-8">
+                <div class="align-items-center d-block d-flex mb-5"><img class="img-fluid me-3 me-md-2 me-lg-4" src="assets/img/icons/locations.png" alt="..." />
+                  <div class="flex-1 align-items-center pt-2">
+                    <h5 class="fw-bold text-light">Visit the greatest places</h5>
+                  </div>
                 </div>
-                <div class="item-gallery gallery-height-core-vitals neutral-orientation">
-                <div class="mask-wrapper is-clickable initialized">
-                <div class="gallery-tap left"></div>
-                <div class="gallery-arrow left icon-arrow-left" style="visibility: hidden;"></div>
-                <div class="mask galleryBoost" style="touch-action: pan-y; user-select: none; transition-duration: 0s; transform: translateX(0px);">
-                <div class="placeholder" style="transform: translateX(-300px);"></div>
-                <div class="placeholder" style="transform: translateX(0px);">
+                <div class="align-items-center d-block d-flex mb-5"><img class="img-fluid me-3 me-md-2 me-lg-4" src="assets/img/icons/schedule.png" alt="..." />
+                  <div class="flex-1 align-items-center pt-2">
+                    <h5 class="fw-bold text-light">Make your own plans.</h5>
+                  </div>
                 </div>
-                <div class="placeholder" style="transform: translateX(300px);"><img src="https://img3.idealista.com/blur/WEB_LISTING-M/0/id.pro.es.image.master/6c/57/47/846614101.jpg" style="visibility: visible;" alt="" width="300" height="225"></div>
+                <div class="align-items-center d-block d-flex mb-5"><img class="img-fluid me-3 me-md-2 me-lg-4" src="assets/img/icons/save.png" alt="..." />
+                  <div class="flex-1 align-items-center pt-2">
+                    <h5 class="fw-bold text-light">Save 50% on your next trip</h5>
+                  </div>
                 </div>
-                <div class="gallery-tap right"></div>
-                <div class="gallery-arrow right icon-arrow-right" style="visibility: visible;"></div>
-                </div>
-                </div>
-                </picture>
-                <div class="item-info-container">
-                <a href="/inmueble/92726554/" role="heading" aria-level="2" class="item-link" title="Habitación en calle Virgen del Val, 5, Val, Alcalá de Henares">
-                <%= r.getNombre() %> <!-- Poner nombre en el titulo del alojamiento-->
-                <%= r.getUbicacionDescrita() %>
-                </a>
-                <div class="price-row ">
-                <span class="item-price h2-simulated">?<span class="txt-big">€/mes</span></span>
-                </div>
-                <div class="item-detail-char">
-                <span class="item-detail"><%= r.getNumDormitorios() %><span>dormitorios</span></span>
-                <span class="item-detail"><%= r.getMaxHuespedes() %><span>maximo numero de huespedes</span></span>
-                <span class="item-detail"><span class="icon-sex-circle boy"></span> <%=r.getNumCamas()%> <span>camas</span></span>
-                <span class="item-detail"><span class="icon-no-smoking"></span> <%=r.getNumBaños()%><span>baños</span><</span>
-                </div>
-                <div class="item-description description">
-                <p class="ellipsis ">
-                    <%= r.getCaracteristicas() %>
-                    <%= r.getServicio() %>
-                    <%= r.getValoracionGlobal() %>
-                </p>
-                </div>
-                <div class="item-toolbar">
-                <button class="icon-chat email-btn action-email fake-anchor"><span>Contactar</span></button>
-                <button title="Guardar" class=" favorite-btn action-fav fake-anchor" data-role="add" data-text-add="Guardar" data-text-remove="Favorito">
-                <i class="icon-heart" role="img"></i>
-                <span>Guardar</span>
-                </button>
-                <button class="icon-delete trash-btn action-discard fake-anchor" data-role="add" title="Descartar" data-text-remove="Descartar" rel="nofollow">
-                </button>
-                </div>
-                </div>
-            </article>
-
-         <%}
-        }else{
-%>
-            <div class="col-lg-7 mx-auto text-center mb-6"></div>
-            <div class="col-lg-7 mx-auto text-center mb-6">
-                <h5 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3" style="color: red" >No results found</h5>
+              </div>
             </div>
-            <%
-        }
-         %>
-    </form>
-        
-      <!-- <section> begin FOOTER =====================================================================================================================-->
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section>
+      <!-- <section> close ============================-->
+      <!-- ============================================-->
+      
+         
+      <div class="col-lg-7 mx-auto text-center mb-6"></div>
+      
+      <!-- <section> begin ============================-->
       <section class="py-0 overflow-hidden">
         <div class="container">
           <div class="row">

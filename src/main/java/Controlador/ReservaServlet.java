@@ -39,49 +39,51 @@ public class ReservaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //variables que vamos a usar
-        ArrayList<Alojamiento> alojamientos = new ArrayList();
-        ArrayList<Imagen> imagenes = new ArrayList();
-       
-        try (PrintWriter out = response.getWriter()) {
-            
-            String provincia = request.getParameter("inputAddress1");
-            String municipio = request.getParameter("inputAddress2");
-            //he quitado la fecha porque se introduce despues en el caso de uso
-           
-            int numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
+        ArrayList alojamientos = new ArrayList<> ();
+        ArrayList imagenes = new ArrayList<> ();
+        String provincia = "";
+        String municipio = "";
+        int numHuespedes = 0;
+        String nextStep = "";
+        String texto = "";
+                
+        try {
+            provincia = request.getParameter("inputAddress1");
+            municipio = request.getParameter("inputAddress2");
+            numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
+            nextStep = "/reservarCliente2.jsp";
             
             //Comprobar que los campos no estén vacíos
-            if(!"".equals(provincia) || !"".equals(municipio)){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "The address cannot be empty");
-            }
-            
-             
-            //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
-            
-          
-            if(alojamientos==null){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
-            }
+            if("".equals(provincia) || "".equals(municipio)){  
+                nextStep = "/reservarCliente.jsp";
+                texto = "The address cannot be empty";
+            }else{
+                nextStep = "/reservarCliente2.jsp";
 
-            
-            //Conseguir la lista de imagenes de los alojamientos
-            imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
-            
-            
+                //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
+                alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,numHuespedes);
+                imagenes=Datos.ImagenDB.buscarImagenesAlojamientos(alojamientos);
+                
+            }
+          
         }catch(Exception e){
             System.out.println(e);
         }
         
         try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextStep);
 
             //mandar lista de alojamientos*/
             request.setAttribute("alojamientos", alojamientos);
-            //mandar lista de imagenes*/
+            request.setAttribute("texto", texto);
             request.setAttribute("imagenes", imagenes);
-           
+            
+         
+            //enviar al servlet la informacion de la direccion y los huespedes de nuevo
+            request.setAttribute("inputAddress1", provincia);
+            request.setAttribute("inputAddress2", municipio);
+            request.setAttribute("inputPersonOne", request.getParameter("inputPersonOne"));
             
             dispatcher.forward(request, response);
             
@@ -89,7 +91,11 @@ public class ReservaServlet extends HttpServlet {
             System.out.println(e);
         }
         
+        
     }
+    
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -118,6 +124,7 @@ public class ReservaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

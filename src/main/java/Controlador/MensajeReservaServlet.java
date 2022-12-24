@@ -9,7 +9,6 @@ import Modelo.Alojamiento;
 import Modelo.Mensaje;
 import Modelo.Anfitrion;
 import Datos.AlojamientoDB;
-import Datos.MensajeDB;
 import Datos.AnfitrionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,8 +40,8 @@ public class MensajeReservaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //variables que vamos a usar
-        String mensaje = "";
-        boolean fraccionPago = false;
+       // String mensaje = "";
+       //boolean fraccionPago = false;
       //DE AQUI PARA ABAJO NO ESTA HECHO
        
         try (PrintWriter out = response.getWriter()) {
@@ -58,20 +57,6 @@ public class MensajeReservaServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "The address cannot be empty");
             }
             
-             
-            //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
-            
-          
-            if(alojamientos==null){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
-            }
-
-            for(i in alojamientos){
-                //Conseguir la lista de imagenes de los alojamientos
-                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
-            }
-            
         }catch(Exception e){
             System.out.println(e);
         }
@@ -80,10 +65,7 @@ public class MensajeReservaServlet extends HttpServlet {
             
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
 
-            //mandar lista de alojamientos*/
-            request.setAttribute("alojamientos", alojamientos);
-            //mandar lista de imagenes*/
-            request.setAttribute("imagenes", imagenes);
+            
            
             
             dispatcher.forward(request, response);
