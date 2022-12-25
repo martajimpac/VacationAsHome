@@ -4,6 +4,7 @@
  */
 package Datos;
 import Modelo.Alojamiento;
+import Modelo.Reserva;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Connection;
@@ -25,7 +26,7 @@ public class AlojamientoDB {
         ResultSet rs = null;
         //buscar alojamientos en la localidad y que tengan espacio para el numero de huespedes introducido
         String query = "SELECT * FROM ALOJAMIENTO a"
-        + "WHERE a.localidad = ? AND a.maxHuesped <= ?;";
+        + "WHERE A.LOCALIDAD LIKE ? AND A.MAXHUESPED >= ?;";
         
         //Crear las variables
         ArrayList <Alojamiento> alojamientos = new ArrayList();

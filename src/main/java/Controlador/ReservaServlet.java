@@ -44,21 +44,17 @@ public class ReservaServlet extends HttpServlet {
         String provincia = "";
         String municipio = "";
         int numHuespedes = 0;
-        String nextStep = "";
         String texto = "";
                 
         try {
             provincia = request.getParameter("inputAddress1");
             municipio = request.getParameter("inputAddress2");
             numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
-            nextStep = "/reservarCliente2.jsp";
             
             //Comprobar que los campos no estén vacíos
             if("".equals(provincia) || "".equals(municipio)){  
-                nextStep = "/reservarCliente.jsp";
                 texto = "The address cannot be empty";
             }else{
-                nextStep = "/reservarCliente2.jsp";
 
                 //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
                 alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,numHuespedes);
@@ -72,7 +68,7 @@ public class ReservaServlet extends HttpServlet {
         
         try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextStep);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
 
             //mandar lista de alojamientos*/
             request.setAttribute("alojamientos", alojamientos);

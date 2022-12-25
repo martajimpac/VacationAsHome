@@ -7,7 +7,7 @@ package Controlador;
 import java.util.ArrayList;
 import Modelo.Alojamiento;
 import Modelo.Mensaje;
-import Modelo.Anfitrion;
+import Modelo.Reserva;
 import Datos.AlojamientoDB;
 import Datos.AnfitrionDB;
 import java.io.IOException;
@@ -40,22 +40,27 @@ public class MensajeReservaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //variables que vamos a usar
-       // String mensaje = "";
-       //boolean fraccionPago = false;
-      //DE AQUI PARA ABAJO NO ESTA HECHO
+        String mensaje = "";
+        String texto = "";
+        boolean fracciona =  false;
+        Reserva reserva = new Reserva();
+       
        
         try (PrintWriter out = response.getWriter()) {
             
-            String provincia = request.getParameter("inputAddress1");
-            String municipio = request.getParameter("inputAddress2");
-            //he quitado la fecha porque se introduce despues en el caso de uso
-           
-            int numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
-            
+            mensaje = request.getParameter("inputMensaje");
+            fracciona =  Boolean.parseBoolean(request.getParameter("inputFracciona"));
+
             //Comprobar que los campos no estén vacíos
-            if(!"".equals(provincia) || !"".equals(municipio)){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "The address cannot be empty");
+            if(!"".equals(mensaje)){
+                texto = "El mensaje no puede estar vacío";
+            }else{
+                texto = "La reserva se ha realizado correctamente";
             }
+            
+            //Guardamos los datos de la reserva
+            reserva.setEstado("realizada");
+            //no se como conseguir ahora los datos de entrada y salida porque eran del anterior formulario
             
         }catch(Exception e){
             System.out.println(e);
@@ -65,9 +70,7 @@ public class MensajeReservaServlet extends HttpServlet {
             
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
 
-            
-           
-            
+            request.setAttribute("textoMensaje", texto); 
             dispatcher.forward(request, response);
             
         } catch (IOException | ServletException e) {

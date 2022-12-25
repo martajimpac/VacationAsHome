@@ -7,8 +7,9 @@ package Controlador;
 import java.util.ArrayList;
 import Modelo.Alojamiento;
 import Modelo.Imagen;
+import Modelo.Reserva;
 import Datos.AlojamientoDB;
-import Datos.ImagenDB;
+import Datos.ReservaBD;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
@@ -43,12 +44,14 @@ public class RealizarReservaServlet extends HttpServlet {
         //variables que vamos a usar
         ArrayList<Alojamiento> alojamientos = new ArrayList();
         ArrayList<Imagen> imagenes = new ArrayList();
+        Reserva reserva = new Reserva();
         Alojamiento alojamiento = new Alojamiento();
         String provincia = "";
         String municipio = "";
         String fechaEnt = "";
         String fechaSal = "";
         String texto = "";
+        String estado = "";
         int indiceAloj = 0;
         int numHuespedes = 0;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -68,16 +71,27 @@ public class RealizarReservaServlet extends HttpServlet {
             alojamiento = alojamientos.get(indiceAloj);
            
             //Comprobar que el alojamiento este disponible en las fechas introducidas y que no tenga una reserva
-            
+            reserva = ReservaBD.getDatos(alojamiento);
+            estado = reserva.getEstado();
+            if("canceladaPorCliente".equals(estado) || "canceladaAnfitrion".equals(estado) || "canceladaFuerzaMayor".equals(estado) ){
+                texto = "The hosting is avaliable";
+            }else if (fechaEntrada.after(reserva.getFechaEntrada())  ||  fechaSalida.before(reserva.getFechaSalida())){
+                texto = "The hosting is avaliable";
+            }else{
+                texto = "The hosting is not avaliable";
+            }
+
         }catch(Exception e){
             System.out.println(e);
         }
         
         try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente2.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
             
-            request.setAttribute("texto", texto);
+            request.setAttribute("alojamientos", alojamientos);
+            request.setAttribute("texto2", texto);
+ 
             dispatcher.forward(request, response);
             
         } catch (IOException | ServletException e) {
