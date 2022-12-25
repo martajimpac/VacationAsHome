@@ -41,44 +41,32 @@ public class RealizarReservaServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        //variables que vamos a usar
-        ArrayList<Alojamiento> alojamientos = new ArrayList();
-        ArrayList<Imagen> imagenes = new ArrayList();
+        //variables que vamos a usar   
         Reserva reserva = new Reserva();
-        Alojamiento alojamiento = new Alojamiento();
-        String provincia = "";
-        String municipio = "";
         String fechaEnt = "";
         String fechaSal = "";
         String texto = "";
         String estado = "";
-        int indiceAloj = 0;
-        int numHuespedes = 0;
+        String ubicacionGPS = "";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {        
-            provincia = request.getParameter("inputAddress1");
-            municipio = request.getParameter("inputAddress2");
-            numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
             fechaEnt = request.getParameter("inputDateOne");
             fechaSal = request.getParameter("inputDateTwo");
-            indiceAloj = Integer.parseInt(request.getParameter("inputAlojamiento"));
+            ubicacionGPS = request.getParameter("inputUbicacionGPS");
             //Pasar las fechas a tipo date
             Date fechaEntrada = dateFormat.parse(fechaEnt);
             Date fechaSalida = dateFormat.parse(fechaSal);
             
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,numHuespedes);
-            alojamiento = alojamientos.get(indiceAloj);
-           
             //Comprobar que el alojamiento este disponible en las fechas introducidas y que no tenga una reserva
-            reserva = ReservaBD.getDatos(alojamiento);
+            reserva = ReservaBD.getDatos(ubicacionGPS);
             estado = reserva.getEstado();
             if("canceladaPorCliente".equals(estado) || "canceladaAnfitrion".equals(estado) || "canceladaFuerzaMayor".equals(estado) ){
-                texto = "The hosting is avaliable";
+                texto = "El apartamento está disponible";
             }else if (fechaEntrada.after(reserva.getFechaEntrada())  ||  fechaSalida.before(reserva.getFechaSalida())){
-                texto = "The hosting is avaliable";
+                texto = "El apartamento está disponible";
             }else{
-                texto = "The hosting is not avaliable";
+                texto = "El apartamento no está disponible";
             }
 
         }catch(Exception e){
@@ -87,9 +75,9 @@ public class RealizarReservaServlet extends HttpServlet {
         
         try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
             
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
-            
-            request.setAttribute("alojamientos", alojamientos);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp"); 
+            request.setAttribute("fechaEntrada", fechaEnt);
+            request.setAttribute("fechaSalida", fechaSal);
             request.setAttribute("texto2", texto);
  
             dispatcher.forward(request, response);

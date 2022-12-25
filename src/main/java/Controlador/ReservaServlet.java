@@ -53,7 +53,7 @@ public class ReservaServlet extends HttpServlet {
             
             //Comprobar que los campos no estén vacíos
             if("".equals(provincia) || "".equals(municipio)){  
-                texto = "The address cannot be empty";
+                texto = "La dirección no puede estar vacía";
             }else{
 
                 //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
@@ -74,12 +74,6 @@ public class ReservaServlet extends HttpServlet {
             request.setAttribute("alojamientos", alojamientos);
             request.setAttribute("texto", texto);
             request.setAttribute("imagenes", imagenes);
-            
-         
-            //enviar al servlet la informacion de la direccion y los huespedes de nuevo
-            request.setAttribute("inputAddress1", provincia);
-            request.setAttribute("inputAddress2", municipio);
-            request.setAttribute("inputPersonOne", request.getParameter("inputPersonOne"));
             
             dispatcher.forward(request, response);
             

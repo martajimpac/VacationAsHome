@@ -25,7 +25,7 @@ public class AlojamientoDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         //buscar alojamientos en la localidad y que tengan espacio para el numero de huespedes introducido
-        String query = "SELECT * FROM ALOJAMIENTO a"
+        String query = "SELECT * FROM ALOJAMIENTO A"
         + "WHERE A.LOCALIDAD LIKE ? AND A.MAXHUESPED >= ?;";
         
         //Crear las variables

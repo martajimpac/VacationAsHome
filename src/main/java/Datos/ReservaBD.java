@@ -15,19 +15,18 @@ import java.sql.ResultSet;
  * @author marta
  */
 public class ReservaBD {
-      public static Reserva getDatos(Alojamiento alojamiento) {
+      public static Reserva getDatos(String ubicacionGPS) {
         Conexion pool = Conexion.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String query = "SELECT * FROM ALOJAMIENTO A JOIN RESERVA r " +
-                       "WHERE A.UBICACIONPRECISA LIKE ?;";
+                       "WHERE A.UBICACIONPRECISA LIKE ? AND r.Alojamiento_ubicacionPrecisa= A.ubicacionPrecisa;";
         try {
           
           Reserva res = new Reserva();
-          String gps = alojamiento.getUbicacionPrecisaGPS();
           ps = connection.prepareStatement(query);
-          ps.setString(1, gps);
+          ps.setString(1, ubicacionGPS);
 
           rs = ps.executeQuery();
               while (rs.next()) { 

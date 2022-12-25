@@ -129,21 +129,46 @@
             <div class="col-12">
                 <div class="carousel slide" id="carouselTestimonials" data-bs-ride="carousel">
                
-                
-               
-                <%  String direccion1 = (String)request.getAttribute("inputAddress1");
-                    String direccion2 = (String)request.getAttribute("inputAddress2");
-                    String huespedes = (String)request.getAttribute("inputPersonOne"); %>
-                    
-                 
-                <!-- ESTE FORMULARIO DEBERIA SALIR DESPUES DE HABER ELEGIDO UN APARTAMENTO-->
-                <!-- LE PASO LOS DATOS DE LOS ALOJAMIENTOS PARA PODER OBTENER EL MISMO ARRAY DE ALOJAMIENTOS QUE ANTES-->
-                <!-- HAY QUE HACER DE ALGUNA FORMA QUE AL SELECCIONAR UNA FOTO TE SELECCIONE EL INDICE DEL ALOJAMIENTO-->
-                <form class="row g-4 mt-5" action="RealizarReservaServlet" method="post" >
-                <input id="inputAddress1" name="inputAddress1" type="hidden" value="<%= direccion1 %>">
-                <input id="inputAddress2" name="inputAddress2" type="hidden" value= <%= direccion2 %>>
-                <input id="inputPersonOne" name="inputPersonOne" type="hidden" value=<%= huespedes %>>   
-                    
+    
+                <!-- FORMULARIO PARA ELEGIR UN ALOJAMIENTO O OTRO-->      
+                    <form class="row g-4 mt-5" action="RealizarReservaServlet" method="post" >      
+                    <div class="col-sm-6 col-md-6 col-xl-5">
+                        <div class="input-group-icon">
+                            <label for="inputPersonOne">Selecciona un alojamiento</label>
+                            <select class="form-select form-voyage-select input-box" id="inputUbicacionGPS" name="inputUbicacionGPS">
+                <!-- VER ALOJAMIENTOS -->
+                <% ArrayList<Alojamiento>  dataList= (ArrayList<Alojamiento>)request.getAttribute("alojamientos");
+               ArrayList<Imagen>   im= (ArrayList<Imagen> )request.getAttribute("imagenes");
+               String texto2 = (String)request.getAttribute("texto2");
+               String fechaEnt = (String)request.getAttribute("fechaEntrada");
+               String fechaSal = (String)request.getAttribute("fechaSalida");
+                        if(dataList!=null){
+                            for(int i=0; i<dataList.size(); i++){
+                                Alojamiento r = dataList.get(i);
+                                Imagen ig=im.get(i);         
+                        %>
+                        <option selected="selected" value="<%= r.getUbicacionPrecisaGPS() %>"><%= r.getNombre() %></option>  
+                        
+                        <div class="col-md-4 mb-3 mb-md-0 h-100">
+                        <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="data:<%= ig.getImagen() %>" alt="..." />
+                            <div class="card-body ps-0">
+                            <h5 ><%= r.getNombre() %></h5>
+                            <span class="fw-bold text-1000 mb-4 text-truncate"><%=r.getLocalidad() %></span><span class="text-800 fs--1 me-2"><i class="fas fa-calendar"></i></span><span class="fw-bold text-1000 mb-4 text-truncate"><%=r.getValoracionGlobal() %></span>
+                            <h6><%= r.getUbicacionDescrita() %></h6>
+                            <h6 class="fw-bold text-1000 mb-4 text-truncate"><%= r.getCaracteristicas() %></h6>
+                            <h6 class="fw-bold text-1000 mb-4 text-truncate"><%= r.getServicio() %></h6>
+                            <h1 class="mb-3 text-primary fw-bolder fs-4"><span>$175</span>
+                          </div>
+                        </div>
+                      </div>
+                        
+         <%}//del for %>
+                    </select><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-user"> </i></span>
+                    </div>
+                    </div>
+         
+                <!-- ESTE FORMULARIO DEBERIA SALIR DESPUES DE HABER ELEGIDO UN APARTAMENTO-->   
+                 <!-- GUARDAR LAS FECHAS DE ENTRADA Y SALIDA PARA LUEGO GUARDARLAS EN LA RESERVA-->  
                     <div class="col-sm-6 col-md-6 col-xl-5">
                         <div class="input-group-icon">
                         <input class="form-control input-box form-voyage-control" id="inputDateOne" name="inputDateOne" type="date" /><span class="nav-link-icon text-800 fs--1 input-box-icon"><i class="fas fa-calendar"></i></span>
@@ -157,33 +182,15 @@
                     <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
                             <button class="btn btn-secondary" type="submit">Realizar reserva</button>
                     </div> 
-                
-                <!-- VER ALOJAMIENTOS -->
-                <% ArrayList<Alojamiento>  dataList= (ArrayList<Alojamiento>)request.getAttribute("alojamientos");
-               ArrayList<Imagen>   im= (ArrayList<Imagen> )request.getAttribute("imagenes");
-                        if(dataList!=null){
-                            for(int i=0; i<dataList.size(); i++){
-                                Alojamiento r = dataList.get(i);
-                                Imagen ig=im.get(i);         
-                        %>
-                        <div class="col-md-4 mb-3 mb-md-0 h-100">
-                        <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="data:<%= ig.getImagen() %>" alt="..." />
-                            <div class="card-body ps-0">
-                            <h5 ><%= r.getNombre() %></h5>
-                            <span class="fw-bold text-1000 mb-4 text-truncate"><%=r.getLocalidad() %></span><span class="text-800 fs--1 me-2"><i class="fas fa-calendar"></i></span><span class="fw-bold text-1000 mb-4 text-truncate"><%=r.getValoracionGlobal() %></span>
-                            <h6><%= r.getUbicacionDescrita() %></h6>
-                            <h6 class="fw-bold text-1000 mb-4 text-truncate"><%= r.getCaracteristicas() %></h6>
-                            <h6 class="fw-bold text-1000 mb-4 text-truncate"><%= r.getServicio() %></h6>
-                            <h1 class="mb-3 text-primary fw-bolder fs-4"><span>$175</span>
-                          </div>
-                        </div>
-                      </div>
-                </form>
-                
-                <% String  texto2= (String)request.getAttribute("texto2");
-                if("The hosting is avaliable".equals(texto2)){ %>
-                    <form class="row g-4 mt-5" action="MensajeReservaServlet" method = "post">             
-                        
+                    </form>
+                    
+                    
+         
+                    <!-- FORMULARIO PARA INTRODUCIR MENSAJE Y FRACCIONA PAGO -->
+                    <%if("El apartamento está disponible".equals(texto2)){ %>
+                    <form class="row g-4 mt-5" action="MensajeReservaServlet" method = "post">  
+                        <input id="inputDateOne" name="inputDateOne" type="hidden" value= <%=fechaEnt %>>
+                        <input id="inputDateTwo" name="inputDateTwo" type="hidden" value= <%=fechaSal %>>
                         <div class="col-sm-6 col-md-6 col-xl-5">
                           <div class="input-group-icon">
                             <label for="inputFracciona">¿Desea fraccionar el pago?</label>
@@ -203,13 +210,10 @@
                         
                         <div class="col-12 col-xl-10 col-lg-12 d-grid mt-6">
                             <button class="btn btn-secondary" type="submit">Confirmar reserva</button>
-                        </div>     
-                        </form>
+                        </div>   
+                    </form>
                 <% } %>
-                        
-                        
-         <%}//del for
-        }else{
+        <%}else{
 %>
             <div class="col-lg-7 mx-auto text-center mb-6"></div>
             <div class="col-lg-7 mx-auto text-center mb-6">

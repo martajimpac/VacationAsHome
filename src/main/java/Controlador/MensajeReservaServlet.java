@@ -10,6 +10,8 @@ import Modelo.Mensaje;
 import Modelo.Reserva;
 import Datos.AlojamientoDB;
 import Datos.AnfitrionDB;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -42,15 +44,23 @@ public class MensajeReservaServlet extends HttpServlet {
         //variables que vamos a usar
         String mensaje = "";
         String texto = "";
+        String fechaEnt = "";
+        String fechaSal = "";
         boolean fracciona =  false;
         Reserva reserva = new Reserva();
-       
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");       
        
         try (PrintWriter out = response.getWriter()) {
             
+            fechaEnt = request.getParameter("inputDateOne");
+            fechaSal = request.getParameter("inputDateTwo");
+            //Pasar las fechas a tipo date
+            Date fechaEntrada = dateFormat.parse(fechaEnt);
+            Date fechaSalida = dateFormat.parse(fechaSal);
             mensaje = request.getParameter("inputMensaje");
             fracciona =  Boolean.parseBoolean(request.getParameter("inputFracciona"));
 
+            //la reserva mejor crear una nueva, hay que poner los datos de fecha entrada y salida
             //Comprobar que los campos no estén vacíos
             if(!"".equals(mensaje)){
                 texto = "El mensaje no puede estar vacío";
@@ -60,6 +70,8 @@ public class MensajeReservaServlet extends HttpServlet {
             
             //Guardamos los datos de la reserva
             reserva.setEstado("realizada");
+            reserva.setFechaEntrada(fechaEntrada);
+            reserva.setFechaSalida(fechaSalida);
             //no se como conseguir ahora los datos de entrada y salida porque eran del anterior formulario
             
         }catch(Exception e){
