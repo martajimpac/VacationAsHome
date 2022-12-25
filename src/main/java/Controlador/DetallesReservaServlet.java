@@ -4,15 +4,12 @@
  */
 package Controlador;
 
-import java.util.ArrayList;
-import Modelo.Alojamiento;
 import Modelo.Imagen;
-import Datos.AlojamientoDB;
-import Datos.ImagenDB;
+import Modelo.Reserva;
+import static Datos.ImagenDB.buscarImagenesReserva;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @authors marta oscar
+ * @author paula
  */
 @WebServlet(name = "DetallesReservaServlet", urlPatterns = {"/DetallesReservaServlet"})
 public class DetallesReservaServlet extends HttpServlet {
@@ -39,55 +36,48 @@ public class DetallesReservaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //variables que vamos a usar
-      //No se como manda la vista la selección del alojamiento, y si siquiera es necesario un controlador para ese paso. QUEDA PAUSADO
-        Alojamiento alojamientoSeleccionado = new Alojamiento;
-        String nombreAlojamiento = "";
-       
-        try (PrintWriter out = response.getWriter()) {
-            
-            String nombreAlojamiento = request.getParameter("nombreAlojamiento");
-            
-            //Comprobar que los campos no estén vacíos
-            if(!"".equals(nombreAlojamiento)){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "You must select an apartment");
-            }
-            
-             
-            //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
-            
-          
-            if(alojamientos==null){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
-            }
-
-            for(i in alojamientos){
-                //Conseguir la lista de imagenes de los alojamientos
-                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
-            }
+        Reserva res = new Reserva();
+        Imagen img= new Imagen();
+        String nom="";
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date d1 = dateFormat.parse(request.getParameter("fechaEntrada"));
+            System.out.println("*************************************************"+request.getParameter("fechaEntrada"));
+            Date d2 = dateFormat.parse(request.getParameter("fechaSalida"));
+            int numHuespedes = Integer.parseInt(request.getParameter("numHuespe"));
+            System.out.println("*************************************************"+request.getParameter("numHuespe"));
+            String est = request.getParameter("estado");
+            nom= request.getParameter("nombre");
+            System.out.println("*************************************************"+nom);
+            String emailAnf = request.getParameter("Alojamiento_Anfitrion_email");
+            String ubprecisa = request.getParameter("Alojamiento_ubicacionPrecisa");
+            String cliente=request.getRemoteUser();
+            res.setAlojamiento_anfitrion_email(emailAnf);
+            res.setAlojamiento_ubicacion_precisa(ubprecisa);
+            res.setEstado(est);
+            res.setFechaEntrada(d1);
+            res.setFechaSalida(d2);
+            res.setNumHuespedes(numHuespedes);
+            res.setUsuarioRegistrado_email(cliente);
+            img=buscarImagenesReserva(ubprecisa);
             
         }catch(Exception e){
             System.out.println(e);
         }
         
-        try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
-            
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
-
-            //mandar lista de alojamientos*/
-            request.setAttribute("alojamientos", alojamientos);
-            //mandar lista de imagenes*/
-            request.setAttribute("imagenes", imagenes);
-           
-            
+        
+        // una vez se pulse el boton, se captura su evento y se recraga la misma pagina
+        try {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reserva.jsp");
+            request.setAttribute("res", res);
+            request.setAttribute("imgen", img);
+            request.setAttribute("nom", nom);
+            // save in the session the email of the user and 
+            // is save in the request object
             dispatcher.forward(request, response);
-            
         } catch (IOException | ServletException e) {
             System.out.println(e);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -130,8 +120,3 @@ public class DetallesReservaServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy

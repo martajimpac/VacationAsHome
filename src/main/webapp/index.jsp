@@ -244,7 +244,7 @@
                         </div>
                       </div>
                       <div class="col-md-4 mb-3 mb-md-0 h-100">
-                        <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/gallery/cinnamon.png" alt="..." />
+                        <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="assets/img/gallery/bora.jpg" alt="..." />
                           <div class="card-img-overlay ps-0"><span class="badge bg-primary ms-3 me-1 p-2"><i class="fas fa-clock me-1"></i><span>20:04:32:21</span></span><span class="badge bg-secondary p-2"><i class="fas fa-bolt me-1"></i><span>trending</span><i class="fas fa-bolt ms-1"> </i></span></div>
                           <div class="card-body ps-0">
                             <h5 class="fw-bold text-1000 mb-4 text-truncate">Bora Bora: Enjoy a romantic cruise tour of at the sunny side of life</h5>
@@ -269,14 +269,6 @@
                   </div>
                 </div>
                 <div class="row flex-center">
-                  <div class="col-auto position-relative z-index-2">
-                    <ol class="carousel-indicators me-xxl-7 me-xl-4 me-lg-7">
-                      <li class="active" data-bs-target="#carouselTestimonials" data-bs-slide-to="0"></li>
-                      <li data-bs-target="#carouselTestimonials" data-bs-slide-to="1"></li>
-                      <li data-bs-target="#carouselTestimonials" data-bs-slide-to="2"></li>
-                      <li data-bs-target="#carouselTestimonials" data-bs-slide-to="3"></li>
-                    </ol>
-                  </div>
                 </div>
               </div>
             </div>

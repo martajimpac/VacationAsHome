@@ -53,4 +53,36 @@ public class ImagenDB {
             return null;
         }
     }
+    public static Imagen buscarImagenesReserva(String ubicacion) {
+        
+        Conexion pool = Conexion.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        //buscar imagenes de los alojamientos de la lista
+      
+        String query = "SELECT * FROM IMAGEN i JOIN ALOJAMIENTO a WHERE i.`Alojamiento_ubicacionPrecisa` = a.`ubicacionPrecisa`AND i.`Alojamiento_ubicacionPrecisa` LIKE ?;";
+        
+        //Crear las variables
+        Imagen imagen = null;
+      
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, ubicacion);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                imagen.setEtiqueta(rs.getString("etiqueta"));
+                imagen.setImagen(rs.getBlob("imagen"));
+                imagen.setAlojamiento_ubicacionPrecisa(rs.getString("Alojamiento_ubicacionPrecisa"));
+            }
+            //cerramos
+            rs.close();
+            ps.close();
+            pool.freeConnection(connection);
+            return imagen;
+          
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

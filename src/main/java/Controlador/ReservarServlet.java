@@ -4,15 +4,11 @@
  */
 package Controlador;
 
-import java.util.ArrayList;
-import Modelo.Alojamiento;
-import Modelo.Mensaje;
-import Modelo.Anfitrion;
-import Datos.AlojamientoDB;
-import Datos.MensajeDB;
-import Datos.AnfitrionDB;
+import Modelo.Reserva;
+import static Datos.ReservaBD.insertarReserva;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @authors oscar
+ * @author paula
  */
-@WebServlet(name = "MensajeReservaServlet", urlPatterns = {"/MensajeReservaServlet"})
-public class MensajeReservaServlet extends HttpServlet {
+@WebServlet(name = "ReservarServlet", urlPatterns = {"/ReservarServlet"})
+public class ReservarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,59 +35,42 @@ public class MensajeReservaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //variables que vamos a usar
-        String mensaje = "";
-        boolean fraccionPago = false;
-      //DE AQUI PARA ABAJO NO ESTA HECHO
-       
-        try (PrintWriter out = response.getWriter()) {
-            
-            String provincia = request.getParameter("inputAddress1");
-            String municipio = request.getParameter("inputAddress2");
-            //he quitado la fecha porque se introduce despues en el caso de uso
-           
-            int numHuespedes = Integer.parseInt(request.getParameter("inputPersonOne"));
-            
-            //Comprobar que los campos no estén vacíos
-            if(!"".equals(provincia) || !"".equals(municipio)){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "The address cannot be empty");
-            }
-            
-             
-            //Devolver la lista de alojamientos para la localidad y los huespedes introducidos
-            alojamientos = AlojamientoDB.buscarLocalidadyHuespedes(provincia,municipio,numHuespedes);
-            
-          
-            if(alojamientos==null){
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "There is no accommodation that matches your search");
-            }
-
-            for(i in alojamientos){
-                //Conseguir la lista de imagenes de los alojamientos
-                imagenes = ImagenDB.buscarImagenesAlojamientos(alojamientos);
-            }
-            
+        Reserva res = new Reserva();
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date d1 = dateFormat.parse(request.getParameter("fechaEntrada"));
+            Date d2 = dateFormat.parse(request.getParameter("fechaSalida"));
+            int numHuespedes = Integer.parseInt(request.getParameter("numHuespedes"));
+            String est = request.getParameter("estado");
+            String pago = request.getParameter("check");
+            System.out.println("******************************"+pago);
+            String emailAnf = request.getParameter("Alojamiento_Anfitrion_email");
+            String ubprecisa = request.getParameter("Alojamiento_ubicacionPrecisa");
+            String comentarios = request.getParameter("comentarios");
+            String cliente=request.getRemoteUser();
+            res.setAlojamiento_anfitrion_email(emailAnf);
+            res.setAlojamiento_ubicacion_precisa(ubprecisa);
+            res.setEstado(est);
+            res.setFechaEntrada(d1);
+            res.setFechaSalida(d2);
+            res.setNumHuespedes(numHuespedes);
+            res.setComentarios(comentarios);
+            res.setUsuarioRegistrado_email(cliente);
+            insertarReserva(res);
         }catch(Exception e){
             System.out.println(e);
         }
         
-        try { //RECARGAR LA PÁGINA Y MANDAR LAS VARIABLES
-            
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/reservarCliente.jsp");
-
-            //mandar lista de alojamientos*/
-            request.setAttribute("alojamientos", alojamientos);
-            //mandar lista de imagenes*/
-            request.setAttribute("imagenes", imagenes);
-           
-            
+        
+        // una vez se pulse el boton, se captura su evento y se recraga la misma pagina
+        try {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistaCliente.jsp");
+            // save in the session the email of the user and 
+            // is save in the request object
             dispatcher.forward(request, response);
-            
         } catch (IOException | ServletException e) {
             System.out.println(e);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

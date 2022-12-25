@@ -34,7 +34,7 @@ public class ConsultaClienteServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-               String provincia = "";
+        String provincia = "";
         String municipio= "";
         String date1 = "";
         String date2 = "";
@@ -63,6 +63,9 @@ public class ConsultaClienteServlet extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistaCliente.jsp");
             request.setAttribute("Aloj1", Aloj1);
             request.setAttribute("img1", img1);
+            request.setAttribute("fechaEntrada", date1);
+            request.setAttribute("fechaSalida", date2);
+            request.setAttribute("numpersonas", numPersonas);
             // save in the session the email of the user and 
             // is save in the request object
             dispatcher.forward(request, response);

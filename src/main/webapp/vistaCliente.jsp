@@ -38,6 +38,7 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="assets/css/theme.css" rel="stylesheet" />
+    <link href="assets/css/main.css" rel="stylesheet" />
 
   </head>
 
@@ -53,7 +54,6 @@
             // Comprobar si el formulario se debe mostrar o ocultar
             if (localStorage.getItem("mostrarFormulario1") === "true") {
               document.getElementById("anuncios").style.display = "block";
-              document.getElementById("img").style.display = "none";
             } else {
               document.getElementById("anuncios").style.display = "none";
             }
@@ -61,15 +61,14 @@
             // Mostrar formulario al hacer clic en el botón
             document.getElementById("consulta").addEventListener("click", function() {
               document.getElementById("anuncios").style.display = "block";
-              document.getElementById("img").style.display = "none";
               // Guardar el estado del formulario en el almacenamiento local
               localStorage.setItem("mostrarFormulario1", "true");
             });
           });
       </script>
       <nav class="navbar navbar-expand-lg navbar-light py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-        <div class="container"><a class="navbar-brand" href="index.jsp"><img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /><span class="fw-bold text-primary ms-2">VacationAsHome</span></a>
-          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand" href="index.jsp"><img class="d-inline-block" src="assets/img/gallery/logo.png" width="50" alt="logo" /><span class="fw-bold text-primary ms-2">VacationAsHome Host</span></a>
+          <button class="navbar-toggler cobuttollapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto pt-2 pt-lg-0 font-base">
               <li class="nav-item px-2"><a class="nav-link fw-medium active" aria-current="page"><span class="nav-link-icon text-800 me-1 fas fa-map-marker-alt"></span><span class="nav-link-text"></span></a></li>
@@ -79,7 +78,7 @@
             </ul>
             <form>
               <a class="nav-item px-2"></a>
-              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><span class="text-primary">Login</span></a>
+              <a href="register.jsp" class="btn btn-voyage-outline order-0" type="submit"><img id="iconoRegister" src="./assets/img/icons/register.png" /><span class="text-primary"></span></a>
             </form>
           </div>
         </div>
@@ -144,6 +143,7 @@
       </section>
         <div id="anuncios">
              <div class="col-lg-7 mx-auto text-center mb-6">
+                 <div class="col-lg-7 mx-auto text-center mb-6"></div>
               <h6 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3">Outcome</h6>
              </div>
              <section class="py-0 overflow-hidden">
@@ -152,15 +152,13 @@
                  <div class="col-6 col-sm-4 col-lg-6">
             <% ArrayList<Alojamiento>  dataList= (ArrayList<Alojamiento>)request.getAttribute("Aloj1");
                ArrayList<Imagen>   im= (ArrayList<Imagen> )request.getAttribute("img1");
-               
                         if(dataList!=null){
                             for(int i=0; i<dataList.size(); i++){
                                 Alojamiento r = dataList.get(i);
                                 Imagen ig=im.get(i);
                         %>
-                        
                     <div class="col-md-4 mb-3 mb-md-0 h-100">
-                        <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="data:image/png;base64,<%= ig.getImagen() %>"/>
+                        <div class="card card-span h-100 text-white"><img class="img-fluid h-100" src="data:<%= ig.getImagen() %>" alt="..." />
                             <div class="card-body ps-0">
                             <h5 ><%= r.getNombre() %></h5>
                             <span class="fw-bold text-1000 mb-4 text-truncate"><%=r.getLocalidad() %></span><span class="text-800 fs--1 me-2"><i class="fas fa-calendar"></i></span><span class="fw-bold text-1000 mb-4 text-truncate"><%=r.getValoracionGlobal() %></span>
@@ -168,6 +166,17 @@
                             <h6 class="fw-bold text-1000 mb-4 text-truncate"><%= r.getCaracteristicas() %></h6>
                             <h6 class="fw-bold text-1000 mb-4 text-truncate"><%= r.getServicio() %></h6>
                             <h1 class="mb-3 text-primary fw-bolder fs-4"><span>$175</span>
+                                <form class="row g-4 mt-5" action="DetallesReservaServlet" metod="post">
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="nombre" style="display: none;" type="text"  placeholder=<%=r.getNombre()%> />
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="fechaEntrada" style="display: none;" type="text" placeholder=<%=request.getAttribute("fechaEntrada") %> />
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="fechaSalida" style="display: none;" type="text" placeholder=<%=request.getAttribute("fechaSalida") %> />
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="numHuespe" style="display: none;" type="text" placeholder=<%=request.getAttribute("numpersonas")%> />
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="estado" style="display: none;" type="text" placeholder="realizada" />
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="Alojamiento_ubicacionPrecisa" style="display: none;" type="text" placeholder=<%=r.getUbicacionPrecisaGPS()%> />
+                                    <input class="form-control input-box form-voyage-control" id="ocultar" name="Alojamiento_Anfitrion_email" style="display: none;" type="text" placeholder=<%=r.getAnfitrion_email()%> />
+                                    <!--<input class="form-control input-box form-voyage-control" id="ocultar" name="precio" style="display: none;" type="text" placeholder=/> -->
+                                    <button id="reserva" class="btn btn-secondary" type="submit">Reservar</button>
+                                </form>
                           </div>
                         </div>
                       </div>
